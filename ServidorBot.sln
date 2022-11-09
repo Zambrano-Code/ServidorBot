@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32630.192
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServidorBot", "ServidorBot\ServidorBot.csproj", "{F6D8D23F-DDFA-4453-9191-A5936A2E4111}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClienteBot", "ClienteBot\ClienteBot.csproj", "{2E85296E-BAAA-48D6-A47C-598CA5348503}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F6D8D23F-DDFA-4453-9191-A5936A2E4111}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F6D8D23F-DDFA-4453-9191-A5936A2E4111}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F6D8D23F-DDFA-4453-9191-A5936A2E4111}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F6D8D23F-DDFA-4453-9191-A5936A2E4111}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2E85296E-BAAA-48D6-A47C-598CA5348503}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E85296E-BAAA-48D6-A47C-598CA5348503}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2E85296E-BAAA-48D6-A47C-598CA5348503}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2E85296E-BAAA-48D6-A47C-598CA5348503}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DF0125A2-B87A-49AC-AF44-5AE5F957AD8C}
+	EndGlobalSection
+EndGlobal
