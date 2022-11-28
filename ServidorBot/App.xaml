@@ -2,8 +2,15 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:ServidorBot"
-             StartupUri="src/MainWindow.xaml">
+             StartupUri="src/View/Windows/VentanaPrincipal.xaml">
     <Application.Resources>
-         
+
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="src/View/Dictionarys/DictionaryST.xaml"/>
+                <ResourceDictionary Source="src/View/Dictionarys/diseñosButtons.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+
     </Application.Resources>
 </Application>

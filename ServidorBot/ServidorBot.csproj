@@ -8,9 +8,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="src\view\controls\001.png" />
-    <None Remove="src\view\controls\002.png" />
-    <None Remove="src\view\controls\003.png" />
+    <None Remove="src\View\UserControls\001.png" />
+    <None Remove="src\View\UserControls\002.png" />
+    <None Remove="src\View\UserControls\003.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -24,9 +24,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="src\view\controls\001.png" />
-    <Resource Include="src\view\controls\002.png" />
-    <Resource Include="src\view\controls\003.png" />
+    <Resource Include="src\View\UserControls\001.png" />
+    <Resource Include="src\View\UserControls\002.png" />
+    <Resource Include="src\View\UserControls\003.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="src\View\ControlsModificados\" />
   </ItemGroup>
 
 </Project>

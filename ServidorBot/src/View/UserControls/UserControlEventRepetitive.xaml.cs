@@ -1,5 +1,4 @@
-﻿using bot;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,29 +12,19 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using bot.acciones;
 
-namespace ServidorBot
+namespace ServidorBot.src.view.UserControls
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Lógica de interacción para UserControlEventRepetitive.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class UserControlEventRepetitive : UserControl
     {
-        private Bot bot = new Bot();
-
-
-        public MainWindow()
+        private MensageRepetitive ms { get; set;}
+        public UserControlEventRepetitive()
         {
-            llamada_bot();
             InitializeComponent();
-            
         }
-
-        private async void llamada_bot()
-        {
-            await bot.MainAsyn();
-        }
-
-
     }
 }

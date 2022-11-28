@@ -1,0 +1,60 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ServidorBot"
+        xmlns:controls="clr-namespace:ServidorBot.src.view.UserControls" x:Class="ServidorBot.MainWindow"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="700" Width="1200" Background="#FF36393F" WindowStyle="None" AllowsTransparency="True"
+        WindowStartupLocation="CenterScreen"
+    >
+        
+    <Grid Height="750">
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="VisualStateGroup"/>
+        </VisualStateManager.VisualStateGroups>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="80"/>
+            <ColumnDefinition Width="400"/>
+            <ColumnDefinition />
+
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition MaxHeight="20"/>
+            <RowDefinition/>
+
+        </Grid.RowDefinitions>
+
+        <Grid  Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Background="#FF292B2F" MouseDown="Windows_MouseDown" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="150"/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="30"/>
+                <ColumnDefinition Width="30"/>
+                <ColumnDefinition Width="40"/>
+            </Grid.ColumnDefinitions>
+
+            <Button Style="{DynamicResource buttonClose}" Grid.Column="4" Content="" Grid.Row="0" Click="Button_Click"/>
+            <Button Style="{DynamicResource buttonMax}" Grid.Column="3" Content="" Grid.Row="0"/>
+            <Button Style="{DynamicResource buttonMin}" Grid.Column="2" Content="" Grid.Row="0"/>
+            <TextBlock HorizontalAlignment="Left" Height="16" Margin="6,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="80" Foreground="White" Text="Secretaria bot"/>
+
+        </Grid>
+
+        <Grid x:Name="Grid_Cole" Grid.Row="2" Grid.Column="0" Background="#FF292B2F" MouseDown="Grid_Cole_MouseDown">
+            <Button x:Name="Buttons" Style="{DynamicResource buttonDinamic}" Content=""/>
+
+        </Grid>
+        <Grid Grid.Row="2" Grid.Column="1" Background="#FF292B2F">
+            <Border BorderThickness="0" Background="#FF2F3136" CornerRadius="30,0,0,0"/>
+
+        </Grid>
+        <Grid Grid.Row="2" Grid.Column="2" Background="#FF36393F">
+
+        </Grid>
+
+
+
+    </Grid>
+</Window>

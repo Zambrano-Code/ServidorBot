@@ -66,6 +66,7 @@ namespace back_bot.src.bot.actividad
                 }
                 else
                 {
+                    Console.WriteLine(ex);
                     return null;
                 }
             }
