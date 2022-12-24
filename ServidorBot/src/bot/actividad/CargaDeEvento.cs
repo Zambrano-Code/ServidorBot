@@ -104,26 +104,18 @@ namespace bot.actividad
 
         private void cargarTabla()
         {
-            try
+            collecionMensageRepetitive = dbEvents.getTable();
+            if (collecionMensageRepetitive == null)
             {
-                collecionMensageRepetitive = dbEvents.getTable();
-
+                if (dbEvents.createTable()) Console.WriteLine($"Se acaba de crear la tabla 'events' con exito.");
+                else throw new Exception("No se pudo obtener datos de la tabla, ni crear la tabla. (CargaDeEvento.cs - cargarTabla())");
             }
-            catch (MySqlException ex)
-            {
-                if (ex.Number == 1146)
-                {
-                    if(dbEvents.createTable()) Console.WriteLine($"Se acaba de crear la tabla events con exito.");
-                }
-                else
-                {
-                    Console.WriteLine(ex.Message);
-                }
-            }
+            
         }
 
         public void activarEventos()
         {
+            if (collecionMensageRepetitive == null) return;
             foreach(var element in collecionMensageRepetitive)
             {
                 element.Value.Star();

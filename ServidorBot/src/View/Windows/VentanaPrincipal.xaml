@@ -4,57 +4,44 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ServidorBot"
-        xmlns:controls="clr-namespace:ServidorBot.src.view.UserControls" x:Class="ServidorBot.MainWindow"
+        xmlns:controls="clr-namespace:ServidorBot.src.view.UserControls" xmlns:UserControls="clr-namespace:ServidorBot.src.View.UserControls" x:Class="ServidorBot.MainWindow"
         mc:Ignorable="d"
-        Title="MainWindow" Height="700" Width="1200" Background="#FF36393F" WindowStyle="None" AllowsTransparency="True"
+        Title="MainWindow" Height="710" Width="1200" Background="Transparent" WindowStyle="None" AllowsTransparency="True"
         WindowStartupLocation="CenterScreen"
     >
-        
-    <Grid Height="750">
-        <VisualStateManager.VisualStateGroups>
-            <VisualStateGroup x:Name="VisualStateGroup"/>
-        </VisualStateManager.VisualStateGroups>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="80"/>
-            <ColumnDefinition Width="400"/>
-            <ColumnDefinition />
 
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition MaxHeight="20"/>
-            <RowDefinition/>
+    <Border Margin="5">
+        <Border.Effect>
+            <DropShadowEffect BlurRadius="8" RenderingBias="Quality" Color="#f00" ShadowDepth="0" Direction="0" />
+        </Border.Effect>
+        <Grid Height="700">
 
-        </Grid.RowDefinitions>
-
-        <Grid  Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Background="#FF292B2F" MouseDown="Windows_MouseDown" >
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="150"/>
+                <ColumnDefinition Width="80"/>
                 <ColumnDefinition/>
-                <ColumnDefinition Width="30"/>
-                <ColumnDefinition Width="30"/>
-                <ColumnDefinition Width="40"/>
             </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition MaxHeight="25"/>
+                <RowDefinition/>
 
-            <Button Style="{DynamicResource buttonClose}" Grid.Column="4" Content="" Grid.Row="0" Click="Button_Click"/>
-            <Button Style="{DynamicResource buttonMax}" Grid.Column="3" Content="" Grid.Row="0"/>
-            <Button Style="{DynamicResource buttonMin}" Grid.Column="2" Content="" Grid.Row="0"/>
-            <TextBlock HorizontalAlignment="Left" Height="16" Margin="6,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="80" Foreground="White" Text="Secretaria bot"/>
+            </Grid.RowDefinitions>
+
+            <!--<UserControls:BarraPrincipal Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Text="Secretaria Bot"/>-->
+
+            <Border Grid.Row="2" Grid.Column="0" CornerRadius="0,0,0,5" Background="{DynamicResource Windows.BG.Principal}">
+                <Grid x:Name="Grid_Cole"  >
+                    <Button x:Name="Buttons" Style="{DynamicResource buttonDinamic}" Content="" Click="Buttons_Click"/>
+                    <Path Data="M9.75,77.75 L59.25,77.5" Fill="#36393F" HorizontalAlignment="Center" Height="2" Margin="0,75,0,0" Stroke="#36393F" Stretch="Fill" StrokeStartLineCap="Round" StrokeEndLineCap="Round" VerticalAlignment="Top" Width="50" StrokeThickness="2"/>
+                    <StackPanel x:Name="List_Servidores" Background="Transparent" Height="603" Margin="0,77,0,0" >
+                    </StackPanel>
+                </Grid>
+            </Border>
+
+            <Border Grid.Row="2" Grid.Column="2" CornerRadius="0,0,5,0" Background="{DynamicResource Windows.BG.Secundario}">
+                <Frame Source="../page/SeccionMensaje.xaml" NavigationUIVisibility="Hidden" /> 
+            </Border>
+
 
         </Grid>
-
-        <Grid x:Name="Grid_Cole" Grid.Row="2" Grid.Column="0" Background="#FF292B2F" MouseDown="Grid_Cole_MouseDown">
-            <Button x:Name="Buttons" Style="{DynamicResource buttonDinamic}" Content=""/>
-
-        </Grid>
-        <Grid Grid.Row="2" Grid.Column="1" Background="#FF292B2F">
-            <Border BorderThickness="0" Background="#FF2F3136" CornerRadius="30,0,0,0"/>
-
-        </Grid>
-        <Grid Grid.Row="2" Grid.Column="2" Background="#FF36393F">
-
-        </Grid>
-
-
-
-    </Grid>
+    </Border>
 </Window>

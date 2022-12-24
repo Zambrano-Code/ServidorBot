@@ -1,0 +1,57 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+
+    <!--#region Button Barra Principal-->
+    <SolidColorBrush x:Key="Button.BG.Tranparent" Color="Transparent"/>
+    <SolidColorBrush x:Key="ButtonClose.BG.MouseOver" Color="Red"/>
+    <SolidColorBrush x:Key="ButtonClose.BG.Click" Color="#AAFF0000"/>
+    <SolidColorBrush x:Key="Buttton.BG.MinMax.MouseOver" Color="#FF36393F"/>
+    <SolidColorBrush x:Key="Buttton.BG.MinMax.Click" Color="#AA292B2F"/>
+    <!--#endregion-->
+
+    <!--#region Button Icono server-->
+    <SolidColorBrush x:Key="Button.IconServer.LabelSelect.Default" Color="White"/>
+    <SolidColorBrush x:Key="Button.IconServer.BG.Default" Color="#36393F"/>
+    <SolidColorBrush x:Key="Button.IconServer.Logo.Default" Color="#FFBBBBBB"/>
+    <SolidColorBrush x:Key="Button.IconServer.Text.Default" Color="#D7D9DA"/>
+    <!--#endregion-->
+
+    <!--#region Create Embeds-->
+    <SolidColorBrush x:Key="Button.CreaterEmbeed.BG.Default" Color="#FF36393F"/>
+    <SolidColorBrush x:Key="Button.CreaterEmbeed.BG.MouseOver" Color="#36393F"/>
+    <SolidColorBrush x:Key="Button.CreaterEmbeed.BG.Click" Color="#AA292B2F"/>
+    <SolidColorBrush x:Key="Button.CreateEmbed.Shadow.Default" Color="#000"/>
+    <!--#endregion-->
+    
+    <!--#region Label Text MensajeDirecto-->
+    <SolidColorBrush x:Key="LabelStyle.BG.Default" Color="Transparent"/>
+    <SolidColorBrush x:Key="LabelStyle.Text.Default" Color="#D7D9DA"/>
+    <!--#endregion-->
+    
+    <!--#region CheckBox Selec User-->
+    <SolidColorBrush x:Key="CheckBox.SelectUser.BG.Default" Color="Transparent"/>
+    <SolidColorBrush x:Key="CheckBox.SelectUser.Border.Default" Color="#2F3136"/>
+    <SolidColorBrush x:Key="CheckBox.btnClose.BG.Default" Color="Transparent"/>
+    <SolidColorBrush x:Key="CheckBox.SelectUser.Text.Default" Color="#D7D9DA"/>
+    
+    
+    <SolidColorBrush x:Key="CheckBox.SelectUser.BG.MouseOver" Color="#3C3F45"/>
+    <SolidColorBrush x:Key="CheckBox.SelectUser.Border.MouseOver" Color="#3C3F45"/>
+    <SolidColorBrush x:Key="CheckBox.btnClose.Icon.MouseOver" Color="#FF9A9A9A"/>
+
+    <SolidColorBrush x:Key="CheckBox.SelectUser.BG.Checked" Color="#3C3F45"/>
+    <SolidColorBrush x:Key="CheckBox.SelectUser.Border.Checked" Color="#3C3F45"/>
+    <SolidColorBrush x:Key="CheckBox.btnClose.Icon.Checked" Color="#FF9A9A9A"/>
+    <!--#endregion-->
+
+    <!--#region Colores de paguina -->
+    <SolidColorBrush x:Key="Windows.BG.Principal" Color="#FF292B2F"/>
+    <SolidColorBrush x:Key="Windows.BG.Secundario" Color="#FF36393F"/>
+    <SolidColorBrush x:Key="Windows.Text" Color="White"/>
+    <SolidColorBrush x:Key="Windows.TextFondo1" Color="#C1C1C1"/>
+    <SolidColorBrush x:Key="Windows.TextFondo2" Color="#A1A1A1"/>
+    <!--#endregion-->
+
+
+</ResourceDictionary>

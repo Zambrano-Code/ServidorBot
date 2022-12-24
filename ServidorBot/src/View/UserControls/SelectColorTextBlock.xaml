@@ -1,0 +1,26 @@
+﻿<UserControl x:Class="ServidorBot.src.View.UserControls.SelectColorTextBlock"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ServidorBot.src.View.UserControls"
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+
+             mc:Ignorable="d" 
+             d:DesignHeight="50" d:DesignWidth="160">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="50"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <TextBlock Text="{Binding Text}" Foreground="{DynamicResource Windows.TextFondo1}" Grid.ColumnSpan="2" FontWeight="Bold" Margin="10,0,0,0"/>
+        <Border Grid.Row="1" Background="{Binding ElementName=Color, Path=SelectedColorText}" CornerRadius="5">
+            <xctk:ColorPicker x:Name="Color" SelectedColor="{Binding Color}" Background="Transparent" BorderThickness="30" BorderBrush="Transparent" ColorMode="ColorCanvas" ShowDropDownButton="False" ShowTabHeaders="False"/>
+        </Border>
+        <TextBox FontSize="14" Text="{Binding Color, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Style="{StaticResource TextBoxStyle1}" FontFamily="Doppio One" Foreground="{DynamicResource Windows.TextFondo2}" Grid.Column="1" Grid.Row="1" Margin="5,2" Width="95"/>
+    </Grid>
+</UserControl>

@@ -1,0 +1,171 @@
+﻿<UserControl x:Class="ServidorBot.src.View.UserControls.PickTime"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ServidorBot.src.View.UserControls"
+             x:Name="pickTime"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+             >
+    <UserControl.Resources>
+
+        <Style x:Key="ItemSelect" TargetType="{x:Type Button}">
+            <Setter Property="Padding" Value="0,5"/>
+            <Setter Property="Foreground" Value="#A7F2CB"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border" >
+                            <Grid>
+                                <Rectangle Height="2" Width="25" Fill="{Binding ElementName=pickTime, Path=BorderBrush}" Margin="0,2,0,0" VerticalAlignment="Top" RadiusX="0.5" RadiusY="0.5"/>
+                                <ContentPresenter Height="18" x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                                <Rectangle Height="2" Width="25" Fill="{Binding ElementName=pickTime, Path=BorderBrush}" VerticalAlignment="Bottom" RadiusX="0.5" RadiusY="0.5"/>
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="Item" TargetType="{x:Type Button}">
+            <Setter Property="Foreground" Value="{Binding ElementName=pickTime, Path=Foreground}"/>
+            <Setter Property="FontSize" Value="10"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border" Background="Transparent">
+                            <Grid>
+                                <ContentPresenter Height="18" x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="FontSize" Value="12"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="Butons" TargetType="{x:Type Button}">
+            <Setter Property="Foreground" Value="{Binding ElementName=pickTime, Path=Foreground}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border" Background="Transparent" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                            <Grid>
+                                <ContentPresenter Height="18" x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Foreground" Value="#67C8CB"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+    <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="25"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Button Style="{DynamicResource ButtonSearchTime}" Click="OpenPopup_Click"/>
+
+        <Popup x:Name="Popup_Picker" AllowsTransparency="True" Placement="Center" HorizontalAlignment="Left" IsOpen="False" VerticalAlignment="Top" DataContext="{Binding ElementName=pickTime}">
+            <Grid Grid.Row="1" Background="Transparent" HorizontalAlignment="Left">
+                <Border Background="{Binding ElementName=pickTime, Path=Background}" Margin="10, 10" CornerRadius="5">
+                    <Border.Effect>
+                        <DropShadowEffect BlurRadius="8" RenderingBias="Quality" Color="#555" ShadowDepth="0" Direction="0" />
+                    </Border.Effect>
+                    <Grid Margin="5">
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="30"/>
+                            <ColumnDefinition Width="2" />
+                            <ColumnDefinition Width="30"/>
+                            <ColumnDefinition Width="2"/>
+                            <ColumnDefinition Width="30"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition Height="50"/>
+                        </Grid.RowDefinitions>
+
+
+
+                        <!--<TextBlock Text=":" Grid.Column="1" Foreground="{Binding Foreground}" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18" FontWeight="Bold" Margin="0,0,0,8"/>-->
+                        <!--<TextBlock Text=":" Grid.Column="3" Foreground="{Binding Foreground}" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18" FontWeight="Bold" Margin="0,0,0,8"/>-->
+
+                        <Grid Grid.Column="0" MouseWheel="Grid_MouseWheelH" Background="Transparent">
+                            <StackPanel>
+                                <Button x:Name="BuHSlot3" Style="{DynamicResource Item}" Content="{Binding Path=HorasSlots.Slot3}" Click="BuHSlot_Click"/>
+                                <Button x:Name="BuHSlot2" Style="{DynamicResource Item}" Content="{Binding Path=HorasSlots.Slot2}" Click="BuHSlot_Click"/>
+                                <Button x:Name="BuHSlot1" Style="{DynamicResource Item}" Content="{Binding Path=HorasSlots.Slot1}" Click="BuHSlot_Click"/>
+                                <Button x:Name="BuHSlot0" Style="{DynamicResource ItemSelect}" Content="{Binding Path=HorasSlots.Slot0}" Click="BuHSlot_Click"/>
+                                <Button x:Name="BuHSlot_1" Style="{DynamicResource Item}" Content="{Binding Path=HorasSlots.Slot_1}" Click="BuHSlot_Click"/>
+                                <Button x:Name="BuHSlot_2" Style="{DynamicResource Item}" Content="{Binding Path=HorasSlots.Slot_2}" Click="BuHSlot_Click"/>
+                                <Button x:Name="BuHSlot_3" Style="{DynamicResource Item}" Content="{Binding Path=HorasSlots.Slot_3}" Click="BuHSlot_Click"/>
+
+                            </StackPanel>
+                        </Grid>
+
+                        <Grid Grid.Column="2" MouseWheel="Grid_MouseWheelM" Background="Transparent">
+                            <StackPanel>
+                                <Button x:Name="BuMSlot3" Style="{DynamicResource Item}" Content="{Binding Path=MinutosSlots.Slot3}" Click="BuMSlot_Click"/>
+                                <Button x:Name="BuMSlot2" Style="{DynamicResource Item}" Content="{Binding Path=MinutosSlots.Slot2}" Click="BuMSlot_Click"/>
+                                <Button x:Name="BuMSlot1" Style="{DynamicResource Item}" Content="{Binding Path=MinutosSlots.Slot1}" Click="BuMSlot_Click"/>
+                                <Button x:Name="BuMSlot0" Style="{DynamicResource ItemSelect}" Content="{Binding Path=MinutosSlots.Slot0}" Click="BuMSlot_Click"/>
+                                <Button x:Name="BuMSlot_1" Style="{DynamicResource Item}" Content="{Binding Path=MinutosSlots.Slot_1}" Click="BuMSlot_Click"/>
+                                <Button x:Name="BuMSlot_2" Style="{DynamicResource Item}" Content="{Binding Path=MinutosSlots.Slot_2}" Click="BuMSlot_Click"/>
+                                <Button x:Name="BuMSlot_3" Style="{DynamicResource Item}" Content="{Binding Path=MinutosSlots.Slot_3}" Click="BuMSlot_Click"/>
+
+                            </StackPanel>
+                        </Grid>
+                        <Grid Grid.Column="4" MouseWheel="Grid_MouseWheelS" Background="Transparent" Margin="0,0,0,5">
+                            <StackPanel>
+                                <Button x:Name="BuSSlot3" Style="{DynamicResource Item}" Content="{Binding Path=SegundoSlots.Slot3}" Click="BuSSlot_Click"/>
+                                <Button x:Name="BuSSlot2" Style="{DynamicResource Item}" Content="{Binding Path=SegundoSlots.Slot2}" Click="BuSSlot_Click"/>
+                                <Button x:Name="BuSSlot1" Style="{DynamicResource Item}" Content="{Binding Path=SegundoSlots.Slot1}" Click="BuSSlot_Click"/>
+                                <Button x:Name="BuSSlot0" Style="{DynamicResource ItemSelect}" Content="{Binding Path=SegundoSlots.Slot0}" Click="BuSSlot_Click"/>
+                                <Button x:Name="BuSSlot_1" Style="{DynamicResource Item}" Content="{Binding Path=SegundoSlots.Slot_1}" Click="BuSSlot_Click"/>
+                                <Button x:Name="BuSSlot_2" Style="{DynamicResource Item}" Content="{Binding Path=SegundoSlots.Slot_2}" Click="BuSSlot_Click"/>
+                                <Button x:Name="BuSSlot_3" Style="{DynamicResource Item}" Content="{Binding Path=SegundoSlots.Slot_3}" Click="BuSSlot_Click"/>
+
+                            </StackPanel>
+                        </Grid>
+                        <Border Grid.Row="1" Grid.ColumnSpan="5" BorderThickness="0,2,0,0"  BorderBrush="{Binding BorderBrush}">
+                            
+                        <Grid>
+                                <Grid Margin="0,4,0,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                    
+                                <Button x:Name="ok" Click="ok_Click" Grid.Row="0" Grid.Column="1" Style="{DynamicResource Butons}" Content="OK" />
+                                <Button x:Name="Cancel" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Click="Cancel_Click" Style="{DynamicResource Butons}" Content="Cancel"/>
+                                <Button x:Name="Now" Grid.Column="0" Grid.Row="0" Click="Now_Click" Style="{DynamicResource Butons}" Content="Now"/>
+                                </Grid>
+                        </Grid>
+                        </Border>
+                    </Grid>
+                </Border>
+            </Grid>
+        </Popup>
+    </Grid>
+</UserControl>

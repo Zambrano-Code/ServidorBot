@@ -1,0 +1,224 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    x:Class="ServidorBot.View.Dictionarys.dicenElement">
+
+    <Style x:Key="ButtonDelete" TargetType="{x:Type Button}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border x:Name="border" Background="Transparent" Width="25" Height="25">
+                        <Path x:Name="Path" Margin="5" Fill="White" Data="M 7 4 C 6.744125 4 6.4879687 4.0974687 6.2929688 4.2929688 L 4.2929688 6.2929688 C 3.9019687 6.6839688 3.9019687 7.3170313 4.2929688 7.7070312 L 11.585938 15 L 4.2929688 22.292969 C 3.9019687 22.683969 3.9019687 23.317031 4.2929688 23.707031 L 6.2929688 25.707031 C 6.6839688 26.098031 7.3170313 26.098031 7.7070312 25.707031 L 15 18.414062 L 22.292969 25.707031 C 22.682969 26.098031 23.317031 26.098031 23.707031 25.707031 L 25.707031 23.707031 C 26.098031 23.316031 26.098031 22.682969 25.707031 22.292969 L 18.414062 15 L 25.707031 7.7070312 C 26.098031 7.3170312 26.098031 6.6829688 25.707031 6.2929688 L 23.707031 4.2929688 C 23.316031 3.9019687 22.682969 3.9019687 22.292969 4.2929688 L 15 11.585938 L 7.7070312 4.2929688 C 7.5115312 4.0974687 7.255875 4 7 4 z" Stretch="Fill"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Path" Property="Fill" Value="#3DDB8B"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="ButtonSearchTime" TargetType="{x:Type Button}">
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border x:Name="border" Background="Transparent" Width="25" Height="25">
+                        <Path x:Name="Path" Margin="1" Fill="White" Data="M15,3c-6.627,0 -12,5.373 -12,12c0,6.627 5.373,12 12,12c6.627,0 12,-5.373 12,-12c0,-6.627 -5.373,-12 -12,-12zM16,16h-8.005c-0.55,0 -0.995,-0.445 -0.995,-0.995v-0.011c0,-0.549 0.445,-0.994 0.995,-0.994h6.005v-8.005c0,-0.55 0.445,-0.995 0.995,-0.995h0.011c0.549,0 0.994,0.445 0.994,0.995z" Stretch="Fill"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Path" Property="Fill" Value="#3DDB8B"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <Style x:Key="DatePickerStyle1" TargetType="{x:Type DatePicker}">
+        <Setter Property="Foreground" Value="#FF333333"/>
+        <Setter Property="IsTodayHighlighted" Value="True"/>
+        <Setter Property="SelectedDateFormat" Value="Short"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Padding" Value="2"/>
+        
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type DatePicker}">
+                    <Border Background="{TemplateBinding Background}">
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Normal"/>
+                                <VisualState x:Name="Disabled">
+                                    <Storyboard>
+                                        <DoubleAnimation Duration="0" Storyboard.TargetName="PART_DisabledVisual" To="1" Storyboard.TargetProperty="Opacity"/>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <Grid x:Name="PART_Root" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}">
+                            <Grid.Resources>
+                                <ControlTemplate x:Key="DropDownButtonTemplate" TargetType="{x:Type Button}">
+                                    <Grid x:Name="bg">
+                                        <Grid.Background>
+                                            <ImageBrush ImageSource="/src/View/Dictionarys/icons8-calendar-1.png" />
+                                        </Grid.Background>
+                                    </Grid>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter TargetName="bg" Property="Background">
+                                                <Setter.Value>
+                                                    <ImageBrush ImageSource="/src/View/Dictionarys/icons8-calendar-2.png" />
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Grid.Resources>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Button x:Name="PART_Button" VerticalAlignment="Center" Height="25" Width="25" Grid.Column="1" Foreground="{TemplateBinding Foreground}" Focusable="False" HorizontalAlignment="Left"  Grid.Row="0" Template="{StaticResource DropDownButtonTemplate}" />
+                            <!--<DatePickerTextBox x:Name="PART_TextBox" Grid.Column="0" Focusable="{TemplateBinding Focusable}" HorizontalContentAlignment="Stretch" Grid.Row="0" VerticalContentAlignment="Stretch"/>-->
+                            <Grid x:Name="PART_DisabledVisual" Grid.Column="1" Grid.ColumnSpan="2" IsHitTestVisible="False" Opacity="0" Grid.Row="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Popup x:Name="PART_Popup" AllowsTransparency="True" Placement="Bottom" StaysOpen="True"/>
+                            </Grid>
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <Style x:Key="LabelStyleIndex" TargetType="{x:Type Label}">
+        <Setter Property="Foreground" Value="{DynamicResource LabelStyle.Text.Default}"/>
+        <Setter Property="Background" Value="{DynamicResource LabelStyle.BG.Default}"/>
+        <Setter Property="FontFamily" Value="Cascadia Mono SemiBold"/>
+        <Setter Property="FontSize" Value="15"/>
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Label}">
+                    <Border Background="{TemplateBinding Background}" Margin="30, 20, 0 , 10">
+                        <ContentPresenter x:Name="contentPresenter" Content="Mensajes Directo" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    
+    <Style x:Key="CheckBoxSelectUser" TargetType="{x:Type CheckBox}">
+        <Setter Property="VerticalAlignment" Value="Top"/>
+        <Setter Property="Margin" Value="0,2,0,0"/>
+        <Setter Property="FontSize" Value="15px"/>
+        <Setter Property="FontFamily" Value="Cascadia Mono SemiBold"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="Background" Value="{DynamicResource CheckBox.SelectUser.BG.Default}"/>
+        <EventSetter Event="Click" Handler="Botn_Click"/>
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type CheckBox}">
+                    <Border x:Name="panel" Background="Transparent" CornerRadius="5" Height="36" Margin="5, 0, 5, 0" Width="190">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="40"/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="20"/>
+                            </Grid.ColumnDefinitions>
+                            <Border CornerRadius="15" Background="{TemplateBinding Background}" Width="30" Grid.Column="0" Margin="5, 3, 5, 3">
+                            </Border>
+                            <Border x:Name="status" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="15" Height="15" CornerRadius="8" BorderThickness="4" Background="{TemplateBinding Foreground}" BorderBrush="{DynamicResource CheckBox.SelectUser.Border.Default}"></Border>
+                            <Label Grid.Column="1" Foreground="{DynamicResource CheckBox.SelectUser.Text.Default}" Margin="0, 5, 0, 0">
+                                <ContentPresenter Content="{TemplateBinding Content}" x:Name="contentPresenter" Focusable="False" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0,0,0" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                            </Label>
+
+                            <Border Grid.Column="3" Margin="0,0,5,0" Background="{DynamicResource CheckBox.btnClose.BG.Default}" CornerRadius="5" Height="15" Width="15">
+                                <Path x:Name="exit" Visibility="Hidden" Data="M13 1 1 13M1 1l12 12" Height="10" Stroke="{DynamicResource CheckBox.btnClose.Icon.Default}" Stretch="Fill" Width="10" StrokeStartLineCap="Round" StrokeEndLineCap="Round" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+                            </Border>
+
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="exit" Property="Visibility" Value="Visible"/>
+                            <Setter TargetName="panel" Property="Background" Value="{DynamicResource CheckBox.SelectUser.BG.MouseOver }"/>
+                            <Setter TargetName="status" Property="BorderBrush" Value="{DynamicResource CheckBox.SelectUser.Border.MouseOver}"/>
+                        </Trigger>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter TargetName="panel" Property="Background" Value="{DynamicResource CheckBox.SelectUser.BG.Checked}"/>
+                            <Setter TargetName="status" Property="BorderBrush" Value="{DynamicResource CheckBox.SelectUser.Border.Checked }"/>
+
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="CheckBoxSelectUserIcon" TargetType="{x:Type CheckBox}">
+        <Setter Property="VerticalAlignment" Value="Top"/>
+        <Setter Property="Margin" Value="0,2,0,0"/>
+        <Setter Property="FontSize" Value="15px"/>
+        <Setter Property="FontFamily" Value="Cascadia Mono SemiBold"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="Background" Value="{DynamicResource CheckBox.SelectUser.BG.Default}"/>
+        <EventSetter Event="Click" Handler="Botn_Click"/>
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type CheckBox}">
+                    <Border x:Name="panel" Background="Transparent" CornerRadius="5" Height="36" Margin="5, 0, 5, 0" Width="190">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="40"/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="20"/>
+                            </Grid.ColumnDefinitions>
+                            <Border CornerRadius="15" Background="{TemplateBinding Background}" Width="30" Grid.Column="0" Margin="5, 3, 5, 3">
+                                <Path x:Name="Icon" Margin="7" Data="M42.298,11.65c-0.676-1.021-1.633-1.802-2.768-2.256c-2.464-0.988-4.583-1.648-6.479-2.02	C31.721,7.114,30.404,7.768,29.771,9l-0.158,0.308c-1.404-0.155-2.895-0.207-4.593-0.164c-1.741-0.042-3.237,0.009-4.643,0.164	L20.22,9c-0.633-1.232-1.952-1.885-3.279-1.625c-1.896,0.371-4.016,1.031-6.479,2.02c-1.134,0.454-2.091,1.234-2.768,2.256	c-4.721,7.131-6.571,14.823-5.655,23.517c0.032,0.305,0.202,0.578,0.461,0.741c3.632,2.29,6.775,3.858,9.891,4.936	c1.303,0.455,2.748-0.054,3.517-1.229l1.371-2.101c-1.092-0.412-2.158-0.9-3.18-1.483c-0.479-0.273-0.646-0.884-0.373-1.363	c0.273-0.481,0.884-0.65,1.364-0.373c3.041,1.734,6.479,2.651,9.942,2.651s6.901-0.917,9.942-2.651	c0.479-0.277,1.09-0.108,1.364,0.373c0.273,0.479,0.106,1.09-0.373,1.363c-1.056,0.603-2.16,1.105-3.291,1.524l1.411,2.102	c0.581,0.865,1.54,1.357,2.528,1.357c0.322,0,0.647-0.053,0.963-0.161c3.125-1.079,6.274-2.649,9.914-4.944	c0.259-0.163,0.429-0.437,0.461-0.741C48.869,26.474,47.019,18.781,42.298,11.65z M18.608,28.983c-1.926,0-3.511-2.029-3.511-4.495	c0-2.466,1.585-4.495,3.511-4.495s3.511,2.029,3.511,4.495C22.119,26.954,20.534,28.983,18.608,28.983z M31.601,28.957	c-1.908,0-3.478-2.041-3.478-4.522s1.57-4.522,3.478-4.522c1.908,0,3.478,2.041,3.478,4.522S33.509,28.957,31.601,28.957z" Fill="WhiteSmoke" HorizontalAlignment="Center" VerticalAlignment="Center" StrokeStartLineCap="Flat" ClipToBounds="False" SnapsToDevicePixels="False" Stretch="Uniform" Stroke="{x:Null}"/>
+                            </Border>
+                            <Border x:Name="status" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="15" Height="15" CornerRadius="8" BorderThickness="4" Background="{TemplateBinding Foreground}" BorderBrush="{DynamicResource CheckBox.SelectUser.Border.Default}"></Border>
+                            <Label Grid.Column="1" Foreground="{DynamicResource CheckBox.SelectUser.Text.Default}" Margin="0, 5, 0, 0">
+                                <ContentPresenter Content="{TemplateBinding Content}" x:Name="contentPresenter" Focusable="False" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0,0,0" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                            </Label>
+
+                            <Border Grid.Column="3" Margin="0,0,5,0" Background="{DynamicResource CheckBox.btnClose.BG.Default}" CornerRadius="5" Height="15" Width="15">
+                                <Path x:Name="exit" Visibility="Hidden" Data="M13 1 1 13M1 1l12 12" Height="10" Stroke="#FF9A9A9A" Stretch="Fill" Width="10" StrokeStartLineCap="Round" StrokeEndLineCap="Round" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+                            </Border>
+
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="exit" Property="Visibility" Value="Visible"/>
+                            <Setter TargetName="panel" Property="Background" Value="{DynamicResource CheckBox.SelectUser.BG.MouseOver }"/>
+                            <Setter TargetName="status" Property="BorderBrush" Value="{DynamicResource CheckBox.SelectUser.Border.MouseOver}"/>
+                        </Trigger>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter TargetName="panel" Property="Background" Value="{DynamicResource CheckBox.SelectUser.BG.Checked}"/>
+                            <Setter TargetName="status" Property="BorderBrush" Value="{DynamicResource CheckBox.SelectUser.Border.Checked }"/>
+
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    
+</ResourceDictionary>

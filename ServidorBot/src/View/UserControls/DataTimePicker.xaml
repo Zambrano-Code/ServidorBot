@@ -1,0 +1,27 @@
+﻿<UserControl 
+             x:Name="element"
+             x:Class="ServidorBot.src.View.UserControls.DataTimePicker"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ServidorBot.src.View.UserControls"
+             xmlns:model="clr-namespace:ServidorBot.src.View.Models"
+             mc:Ignorable="d" 
+             d:DesignHeight="50" d:DesignWidth="100">
+    <UserControl.Resources>
+        <model:ModelDateTimePicker x:Key="modelView"/>
+    </UserControl.Resources>
+    <Grid >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="30"/>
+            <ColumnDefinition Width="30"/>
+            <ColumnDefinition Width="30"/>
+        </Grid.ColumnDefinitions>
+        <TextBox Text="{Binding Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource TextBoxStyle1}" Margin="5,2" MaxLength="256"/>
+        <DatePicker Text="{Binding Date, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Style="{DynamicResource DatePickerStyle1}"/>
+        <local:PickTime Text="{Binding Time, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" Background="{DynamicResource Windows.BG.Principal}" Foreground="{DynamicResource Windows.Text}" />
+        <Button x:Name="Clear" Grid.Column="3" Style="{DynamicResource ButtonDelete}" Click="Clear_Click"/>
+    </Grid>
+</UserControl>

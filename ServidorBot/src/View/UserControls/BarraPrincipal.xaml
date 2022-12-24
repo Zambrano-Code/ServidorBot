@@ -1,0 +1,34 @@
+﻿<UserControl 
+             x:Name="barra"
+             x:Class="ServidorBot.src.View.UserControls.BarraPrincipal"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ServidorBot.src.View.UserControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="50" d:DesignWidth="800">
+
+    <Border MouseDown="window_Movible" CornerRadius="10,10,0,0" Background="#FF292B2F">
+        <Grid>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <!--<ColumnDefinition Width="30"/>
+                    <ColumnDefinition Width="30"/>
+                    <ColumnDefinition Width="40"/>-->
+            </Grid.ColumnDefinitions>
+
+            <DockPanel>
+                <Button x:Name="Close" Click="Close_Click" DockPanel.Dock="Right" Style="{DynamicResource buttonClose}"  Content="" Grid.Row="0" Width="40" HorizontalAlignment="Right"/>
+                <Button x:Name="Max" Click="Max_Click" Visibility="{Binding Maximize}" DockPanel.Dock="Right" Style="{DynamicResource buttonMax}"  Content="" Grid.Row="0" Width="30" HorizontalAlignment="Right"/>
+                <Button x:Name="Min" Click="Min_Click" Visibility="{Binding Minimize}" DockPanel.Dock="Right" Style="{DynamicResource buttonMin}" Content="" Grid.Row="0" Width="30" HorizontalAlignment="Right"/>
+                
+            </DockPanel>
+
+            <TextBlock HorizontalAlignment="Left" Height="16" Margin="6,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="80" Foreground="{DynamicResource Windows.Text}" Text="{Binding Title}"/>
+
+        </Grid>
+    </Border>
+
+</UserControl>

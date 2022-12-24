@@ -9,6 +9,7 @@ namespace bot.modelos
 {
     public struct ModeloJsonMysql
     {
+
         [JsonProperty("datasource")]
         public string Datasource { get; private set; }
 
@@ -23,6 +24,8 @@ namespace bot.modelos
 
         [JsonProperty("database")]
         public string Database { get; private set; }
+
+
 
     }
 }

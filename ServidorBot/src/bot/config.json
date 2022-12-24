@@ -1,6 +1,8 @@
 ﻿{
-  "token": "MTAxNTcxMDg4MzcxODExNTQwOQ.GGXQI5.vpui9UUzE_OmlG35JiEJNDwC3TlGGVxuVAAdS8",
-  "prefix": "!"
+  "token": "OTcxMDcwOTc5OTQ4MjkwMTA4.GNAvfT.m8aD6UY6jZz8ATuRhRJUcwlZdTuzyOj_qc27Ng",
+  "prefix": "!",
+  "secret": "39qFWB7ZQaDtGnjT1CboYfPq77uXvFT4",
 
+  "tokenSecretariaPrueva": "MTAxNTcxMDg4MzcxODExNTQwOQ.GGXQI5.vpui9UUzE_OmlG35JiEJNDwC3TlGGVxuVAAdS8",
 }
 

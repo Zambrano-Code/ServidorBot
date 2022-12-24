@@ -2,13 +2,17 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:ServidorBot"
-             StartupUri="src/View/Windows/VentanaPrincipal.xaml">
+             StartupUri="src/View/Windows/createEmbed.xaml">
     <Application.Resources>
 
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="src/View/Dictionarys/DictionaryST.xaml"/>
-                <ResourceDictionary Source="src/View/Dictionarys/diseñosButtons.xaml"/>
+                <ResourceDictionary Source="src/View/Dictionarys/disenElement.xaml"/>
+                <ResourceDictionary Source="src/View/Dictionarys/disenButtons.xaml"/>
+                <ResourceDictionary Source="src/View/Dictionarys/scrollBarStyle.xaml"/>
+                <ResourceDictionary Source="src/View/Dictionarys/TablaDeColores.xaml"/>
+                <ResourceDictionary Source="src/View/Dictionarys/disenTextBox.xaml"/>
+
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
 

@@ -19,6 +19,11 @@ namespace bot
     public class Bot
     {
         public static DiscordSocketClient? _cliente { get; private set; }
+        public static CargaDeEvento? _eventoMenRep { get; private set; }
+        public static CargaDeUserDM? _chanelDMUser { get; private set; }
+
+
+
         private DiscordSocketConfig? _discordConfig { get; set; }
         private CommandService _commandService { get; set; }
         private CommandHandler? _handler { get; set; }
@@ -54,48 +59,61 @@ namespace bot
             await _handler.InstallCommandsAsync();
 
 
-            _cliente.Ready += () =>
-            {
-                Console.WriteLine(stryleConsole.ContainerText("Bot is connected!"));
-                //------------------------------------------------------------------
-                aaa();
-                //bbb();
-                //ccc();
-
-                //------------------------------------------------------------------
-                return Task.CompletedTask;
-            };
-
+            _cliente.Ready += _cliente_Ready;
+            _cliente.MessageReceived += _cliente_MessageReceived;
 
             await Task.Delay(-1);
 
 
         }
 
-        public static SocketChannel buscarCanal(ulong id)
+
+        //---------------------------------------------------------------------------------------
+        //        Metodos del eventos al bot
+        private Task _cliente_MessageReceived(SocketMessage arg)
         {
-            return _cliente.GetChannel(id);
+            var id = arg.Author.Id;
+            if ( id == 971070979948290108 || arg.Author.IsBot) return Task.CompletedTask;
+            //Console.WriteLine($"Mensajge: {arg.Content} User: {arg.Author.Username}"); 
+            var temp = arg.Author;
+            var temp2 = temp.CreateDMChannelAsync().Result;
+            //Console.WriteLine($"Mensaje: {arg.Content} \n ID autor: {temp.Id} \n ID DM Chanel: {temp2.Id}");
+            _chanelDMUser.agregarDMUser(temp2);
+
+            
+
+            return Task.CompletedTask;
         }
 
-        private void aaa()
+        private Task _cliente_Ready()
         {
-            var cde = new CargaDeEvento();
+            Console.WriteLine(stryleConsole.ContainerText("Bot is connected!"));
+            //------------------------------------------------------------------
+            CargarEventos();
+            CargarMDUser();
+            //bbb();
+            //ccc();
 
-            //var embed = new EmbedBuilder();
-            //embed.Description = "Jajaja!";
-            //embed.Title = "Dos";
+            //------------------------------------------------------------------
 
-            //DateTime t1 = new DateTime(2022, 10, 12, 08, 40, 0);
-            //TimeSpan t2 = new TimeSpan(0, 0, 0, 10);
-
-            //SocketChannel sc = buscarCanal(1013262734411972718);
-
-            //MensageRepetitive temp = new MensageRepetitive("mensaje5", "Hola!", embed, t1, t2, "local", sc);
-
-            //var a = cde.agregarMRepetitivo(temp);
-
-            cde.activarEventos();
+            return Task.CompletedTask;
+            
         }
+
+
+        private void CargarEventos()
+        {
+            _eventoMenRep = new CargaDeEvento();
+            
+            _eventoMenRep.activarEventos();
+        }
+
+        private void CargarMDUser()
+        {
+            _chanelDMUser = new CargaDeUserDM();
+
+        }
+
 
         private async void bbb()
         {
@@ -126,6 +144,31 @@ namespace bot
 
         }
 
+        //---------------------------------------------------------------------------------------
+        //         Metodos staticos
+
+        /// <summary>
+        /// Busca el canal de discord con el ide que le declares
+        /// </summary>
+        /// <param name="id">id del canal a buscar</param>
+        /// <returns></returns>
+        public static SocketChannel buscarCanal(ulong id)
+        {
+            return _cliente.GetChannel(id);
+        }
+
+        /// <summary>
+        /// Busca el usuario y crear el canal de mensaje directo para el chat.
+        /// </summary>
+        /// <param name="id">Id del usuario</param>
+        /// <returns></returns>
+        public static IDMChannel buscarDMUser(ulong id)
+        {
+            var temp = _cliente.GetDMChannelAsync(id);
+            return temp.Result;
+        }
+
+        //---------------------------------------------------------------------------------------
     }
 
 }

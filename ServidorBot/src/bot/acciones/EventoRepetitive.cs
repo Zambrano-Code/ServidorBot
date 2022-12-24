@@ -82,6 +82,13 @@ namespace bot.acciones
 
         }
 
+
+        /// <summary>
+        /// Este metodo al ejecuta un evento a la hora fijada, repitira la accion evento() cada cierto tiempo (time2), si es que le agrego un valor
+        /// </summary>
+        /// <param name="time1">Tiempo que se va a ejcutar la accion</param>
+        /// <param name="time2">Tiempo a repetir la accion</param>
+        /// <returns></returns>
         private async Task Relog(TimeSpan time1, TimeSpan time2)
         {
             timer = new PeriodicTimer(time1);

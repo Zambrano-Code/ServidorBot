@@ -8,15 +8,18 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="src\View\UserControls\001.png" />
-    <None Remove="src\View\UserControls\002.png" />
-    <None Remove="src\View\UserControls\003.png" />
+    <None Remove="src\View\Dictionarys\iconCode.png" />
+    <None Remove="src\View\Dictionarys\icons8-calendar-1.png" />
+    <None Remove="src\View\Dictionarys\icons8-calendar-2.png" />
+    <None Remove="src\View\Page\PlaceHolder.png" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Discord.Net" Version="3.8.1" />
+    <PackageReference Include="Extended.Wpf.Toolkit" Version="4.5.0" />
     <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.39" />
     <PackageReference Include="MySql.Data" Version="8.0.31" />
+    <PackageReference Include="Syncfusion.Shared.Windows" Version="19.3.0.48" />
   </ItemGroup>
 
   <ItemGroup>
@@ -24,13 +27,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="src\View\UserControls\001.png" />
-    <Resource Include="src\View\UserControls\002.png" />
-    <Resource Include="src\View\UserControls\003.png" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="src\View\ControlsModificados\" />
+    <Resource Include="src\View\Dictionarys\iconCode.png" />
+    <Resource Include="src\View\Dictionarys\icons8-calendar-1.png" />
+    <Resource Include="src\View\Dictionarys\icons8-calendar-2.png" />
+    <Resource Include="src\View\Page\PlaceHolder.png" />
   </ItemGroup>
 
 </Project>
