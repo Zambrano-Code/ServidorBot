@@ -13,6 +13,9 @@
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter TargetName="Path" Property="Fill" Value="#3DDB8B"/>
                         </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="Path" Property="Fill" Value="#8A5F62"/>
+                        </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
@@ -31,47 +34,166 @@
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter TargetName="Path" Property="Fill" Value="#3DDB8B"/>
                         </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="Path" Property="Fill" Value="#8A5F62"/>
+                        </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
-    
+
+    <Style x:Key="buttonPlus" TargetType="{x:Type Button}">
+        <EventSetter Event="MouseEnter" Handler="Giro_Entrada"/>
+        <EventSetter Event="MouseLeave" Handler="Giro_salida"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border x:Name="border" Background="Transparent" RenderTransformOrigin="0.5,0.5">
+                        <Path x:Name="Path" Fill="White" Margin="3" Data="M14.5,14.501l-10.502,0c-0.828,0 -1.5,0.673 -1.5,1.5c0,0.828 0.672,1.5 1.5,1.5l10.502,0l-0.001,10.502c0,0.828 0.672,1.5 1.5,1.501c0.828,-0 1.5,-0.673 1.5,-1.5l0.001,-10.503l10.502,0c0.828,0 1.5,-0.672 1.5,-1.5c0,-0.827 -0.672,-1.5 -1.5,-1.5l-10.502,0l0.001,-10.501c-0,-0.828 -0.672,-1.501 -1.5,-1.501c-0.828,0 -1.5,0.672 -1.5,1.5l-0.001,10.502Z" Stretch="Fill" RenderTransformOrigin="0.5, 0.5"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Path" Property="Fill" Value="#3DDB8B"/>
+
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="Path" Property="Fill" Value="#8A5F62"/>
+                        </Trigger>
+
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+    <Style x:Key="ButtonDeleteEmbed" TargetType="{x:Type Button}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Background="{DynamicResource CheckBox.btnClose.BG.Default}" CornerRadius="5" Height="20" Width="20">
+                        <Path x:Name="exit" Visibility="Visible" Data="M13 1 1 13M1 1l12 12" Height="10" Stroke="{DynamicResource CheckBox.btnClose.Icon.Default}" Stretch="Fill" Width="10" StrokeStartLineCap="Round" StrokeEndLineCap="Round" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="exit" Property="Stroke" Value="#3DDB8B"/>
+
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="exit" Property="Stroke" Value="#8A5F62"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="ButtonEditEmbed" TargetType="{x:Type Button}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Background="{DynamicResource CheckBox.btnClose.BG.Default}" CornerRadius="5" Height="20" Width="20">
+                        <Path x:Name="exit" Visibility="Visible" Height="10" Data="M82.2 79.2H18.8c-1.3 0-2.4 1.1-2.4 2.4s1.1 2.4 2.4 2.4h63.4c1.3 0 2.4-1.1 2.4-2.4s-1.1-2.4-2.4-2.4zM16.5 58.2l-.1 11.3c0 .6.2 1.3.7 1.7.5.4 1.1.7 1.7.7l11.3-.1c.6 0 1.2-.3 1.7-.7l38.8-38.8c.9-.9.9-2.5 0-3.4L59.4 17.7c-.9-.9-2.5-.9-3.4 0l-7.8 7.8-31 31c-.5.5-.7 1.1-.7 1.7zm49-27.6L61.1 35l-7.8-7.8 4.4-4.4 7.8 7.8zM21.3 59.2l28.6-28.6 7.8 7.8L29.1 67h-7.8v-7.8z" Stroke="{DynamicResource CheckBox.btnClose.Icon.Default}" Stretch="Fill" Width="10" StrokeStartLineCap="Round" StrokeEndLineCap="Round" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="exit" Property="Stroke" Value="#3DDB8B"/>
+
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="exit" Property="Stroke" Value="#8A5F62"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="buttonRemove" TargetType="{x:Type Button}">
+        <EventSetter Event="MouseEnter" Handler="Giro_Entrada"/>
+        <EventSetter Event="MouseLeave" Handler="Giro_salida"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border x:Name="border" Background="Transparent" RenderTransformOrigin="0.5,0.5">
+                        <Path x:Name="Path" Fill="White" Margin="3" Data="m81.5 5.5h-63a13 13 0 0 0 -13 13v63a13 13 0 0 0 13 13h63a13 13 0 0 0 13-13v-63a13 13 0 0 0 -13-13zm-10.766 45.874a4 4 0 0 1 -4 4h-33.468a4 4 0 0 1 -4-4v-2.748a4 4 0 0 1 4-4h33.468a4 4 0 0 1 4 4z" Stretch="Fill" RenderTransformOrigin="0.5, 0.5"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Path" Property="Fill" Value="#3DDB8B"/>
+
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="Path" Property="Fill" Value="#8A5F62"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="ButtonCreateEmbedCancel" TargetType="{x:Type Button}">
+        <Setter Property="Background" Value="{DynamicResource Windows.BG.Principal}"/>
+        <Setter Property="Foreground" Value="{DynamicResource Windows.TextFondo1}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="Padding" Value="1"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border x:Name="border" CornerRadius="5" Background="{TemplateBinding Background}">
+                        <Border.Effect>
+                            <DropShadowEffect BlurRadius="8" RenderingBias="Quality" Color="#000" ShadowDepth="0" Direction="0" />
+                        </Border.Effect>
+                        <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="#362B2F"/>
+                            <Setter Property="FontSize" Value="15"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Foreground" Value="#E85F62"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <Style x:Key="DatePickerStyle1" TargetType="{x:Type DatePicker}">
         <Setter Property="Foreground" Value="#FF333333"/>
         <Setter Property="IsTodayHighlighted" Value="True"/>
-        <Setter Property="SelectedDateFormat" Value="Short"/>
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="Padding" Value="2"/>
-        
+
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type DatePicker}">
-                    <Border Background="{TemplateBinding Background}">
-                        <VisualStateManager.VisualStateGroups>
-                            <VisualStateGroup x:Name="CommonStates">
-                                <VisualState x:Name="Normal"/>
-                                <VisualState x:Name="Disabled">
-                                    <Storyboard>
-                                        <DoubleAnimation Duration="0" Storyboard.TargetName="PART_DisabledVisual" To="1" Storyboard.TargetProperty="Opacity"/>
-                                    </Storyboard>
-                                </VisualState>
-                            </VisualStateGroup>
-                        </VisualStateManager.VisualStateGroups>
+                    <Border>
                         <Grid x:Name="PART_Root" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}">
                             <Grid.Resources>
                                 <ControlTemplate x:Key="DropDownButtonTemplate" TargetType="{x:Type Button}">
                                     <Grid x:Name="bg">
                                         <Grid.Background>
-                                            <ImageBrush ImageSource="/src/View/Dictionarys/icons8-calendar-1.png" />
+                                            <ImageBrush ImageSource="/src/View/img/icons8-calendar-1.png" />
                                         </Grid.Background>
                                     </Grid>
                                     <ControlTemplate.Triggers>
                                         <Trigger Property="IsMouseOver" Value="True">
                                             <Setter TargetName="bg" Property="Background">
                                                 <Setter.Value>
-                                                    <ImageBrush ImageSource="/src/View/Dictionarys/icons8-calendar-2.png" />
+                                                    <ImageBrush ImageSource="/src/View/img/icons8-calendar-2.png" />
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Trigger>
+                                        <Trigger Property="IsPressed" Value="True">
+                                            <Setter TargetName="bg" Property="Background">
+                                                <Setter.Value>
+                                                    <ImageBrush ImageSource="/src/View/img/icons8-calendar-3.png" />
                                                 </Setter.Value>
                                             </Setter>
                                         </Trigger>
@@ -89,7 +211,7 @@
                                     <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
-                                <Popup x:Name="PART_Popup" AllowsTransparency="True" Placement="Bottom" StaysOpen="True"/>
+                                <Popup x:Name="PART_Popup" AllowsTransparency="True" StaysOpen="True"/>
                             </Grid>
                         </Grid>
                     </Border>
@@ -97,7 +219,7 @@
             </Setter.Value>
         </Setter>
     </Style>
-    
+
     <Style x:Key="LabelStyleIndex" TargetType="{x:Type Label}">
         <Setter Property="Foreground" Value="{DynamicResource LabelStyle.Text.Default}"/>
         <Setter Property="Background" Value="{DynamicResource LabelStyle.BG.Default}"/>
@@ -111,21 +233,20 @@
                         <ContentPresenter x:Name="contentPresenter" Content="Mensajes Directo" />
                     </Border>
                     <ControlTemplate.Triggers>
-                        
+
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
-    
-    
+
+
     <Style x:Key="CheckBoxSelectUser" TargetType="{x:Type CheckBox}">
         <Setter Property="VerticalAlignment" Value="Top"/>
         <Setter Property="Margin" Value="0,2,0,0"/>
         <Setter Property="FontSize" Value="15px"/>
         <Setter Property="FontFamily" Value="Cascadia Mono SemiBold"/>
         <Setter Property="HorizontalAlignment" Value="Center"/>
-        <Setter Property="Background" Value="{DynamicResource CheckBox.SelectUser.BG.Default}"/>
         <EventSetter Event="Click" Handler="Botn_Click"/>
 
         <Setter Property="Template">
@@ -149,6 +270,7 @@
                                 <Path x:Name="exit" Visibility="Hidden" Data="M13 1 1 13M1 1l12 12" Height="10" Stroke="{DynamicResource CheckBox.btnClose.Icon.Default}" Stretch="Fill" Width="10" StrokeStartLineCap="Round" StrokeEndLineCap="Round" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
                             </Border>
+
 
                         </Grid>
                     </Border>
@@ -197,7 +319,7 @@
                             </Label>
 
                             <Border Grid.Column="3" Margin="0,0,5,0" Background="{DynamicResource CheckBox.btnClose.BG.Default}" CornerRadius="5" Height="15" Width="15">
-                                <Path x:Name="exit" Visibility="Hidden" Data="M13 1 1 13M1 1l12 12" Height="10" Stroke="#FF9A9A9A" Stretch="Fill" Width="10" StrokeStartLineCap="Round" StrokeEndLineCap="Round" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                <Path x:Name="exit" Visibility="Hidden" Data="M13 1 1 13M1 1l12 12" Height="10" Stroke="{DynamicResource CheckBox.btnClose.Icon.Default}" Stretch="Fill" Width="10" StrokeStartLineCap="Round" StrokeEndLineCap="Round" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
                             </Border>
 
@@ -219,6 +341,6 @@
             </Setter.Value>
         </Setter>
     </Style>
-    
-    
+
+
 </ResourceDictionary>

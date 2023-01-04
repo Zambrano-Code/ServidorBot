@@ -18,6 +18,6 @@
             <RowDefinition />
         </Grid.RowDefinitions>
         <TextBlock Text="{Binding Text}" Foreground="{DynamicResource Windows.TextFondo1}" Grid.ColumnSpan="2" FontWeight="Bold" Margin="10,0,0,0"/>
-        <local:DataTimePicker Grid.Row="1"/>
+        <local:DataTimePicker DataContext="{Binding DateTime}" Grid.Row="1"/>
     </Grid>
 </UserControl>

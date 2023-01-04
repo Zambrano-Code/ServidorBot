@@ -86,7 +86,7 @@
         </Setter>
     </Style>
 
-    <Style x:Key="buttonDinamic" TargetType="{x:Type Button}">
+    <Style x:Key="buttonDinamic" TargetType="{x:Type CheckBox}">
         <Setter Property="Width" Value="70"/>
         <Setter Property="Height" Value="60"/>
         <Setter Property="VerticalAlignment" Value="Top"/>
@@ -98,7 +98,7 @@
 
         <Setter x:Name="aa" Property="Template">
             <Setter.Value>
-                <ControlTemplate x:Name="aaa" TargetType="{x:Type Button}">
+                <ControlTemplate x:Name="aaa" TargetType="{x:Type CheckBox}">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="10px"/>
@@ -125,7 +125,7 @@
 
     </Style>
 
-    <Style x:Key="buttonDinamicServer00" TargetType="{x:Type Button}">
+    <Style x:Key="buttonDinamicServer00" TargetType="{x:Type CheckBox}">
         <Setter Property="Width" Value="80"/>
         <Setter Property="Height" Value="50"/>
         <Setter Property="VerticalAlignment" Value="Top"/>
@@ -134,22 +134,22 @@
         <Setter Property="FontSize" Value="15px"/>
         <Setter Property="FontFamily" Value="Cascadia Mono SemiBold"/>
         <Setter Property="HorizontalAlignment" Value="Left"/>
-        <!--<EventSetter Event="MouseEnter" Handler="border_entrada"/>
+        <EventSetter Event="MouseEnter" Handler="border_entrada"/>
         <EventSetter Event="MouseLeave" Handler="border_salida"/>
-        <EventSetter Event="Click" Handler="accion_click"/>-->
+        <EventSetter Event="Click" Handler="accion_click"/>
 
 
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type Button}">
+                <ControlTemplate TargetType="{x:Type CheckBox}">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="10px"/>
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
                         <Border x:Name="border_animati" Grid.Column="0" Background="{DynamicResource Button.IconServer.LabelSelect.Default}" Width="0" HorizontalAlignment="Left" Height="0" CornerRadius="0, 3, 3, 0"/>
-                        <Border x:Name="border_interno" CornerRadius="30" Width="50"  Background="{TemplateBinding Background}" Grid.Column="1" Margin="0,0,10, 0" >
-                            <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        <Border x:Name="border_interno" CornerRadius="30" Width="50" Background="{TemplateBinding Background}" Grid.Column="1" Margin="0,0,10, 0" >
+                            <ContentPresenter x:Name="contentPresenter" VerticalAlignment="Center" HorizontalAlignment="Center" Focusable="False"  RecognizesAccessKey="True"/>
                         </Border>
 
                     </Grid>
@@ -177,7 +177,7 @@
                         </Border.Effect>
                         <Grid>
                             <Grid.Background>
-                                <ImageBrush ImageSource="/src/View/Dictionarys/iconCode.png"/>
+                                <ImageBrush ImageSource="/src/View/img/iconCode.png"/>
                             </Grid.Background>
                         </Grid>
                     </Border>

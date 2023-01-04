@@ -10,6 +10,8 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
+using ServidorBot.src.View.Clases;
+
 using Duration = System.Windows.Duration;
 
 namespace ServidorBot.Dictionarys
@@ -19,7 +21,7 @@ namespace ServidorBot.Dictionarys
         //-------------------------------------------------------
         private static double SPEED = 20;
         private static int VALUE1 = 18;
-        private static double VALUE2 = 50/2;
+        private static double VALUE2 = 50 / 2;
         private static int SALTO_F = 1;
 
 
@@ -55,7 +57,7 @@ namespace ServidorBot.Dictionarys
         private DoubleAnimation selectElementSalida;
         //----------------------------------------------------
 
-        private Button botonSelected;
+        private CheckBox botonSelected;
 
 
         public disenButtons()
@@ -64,12 +66,12 @@ namespace ServidorBot.Dictionarys
             InitializeComponent();
 
 
-            animEntrada = animatedCornerRadius(VALUE2, VALUE1, SPEED, SALTO_F);
+            animEntrada = ClasesDeAnimacionesForFrames.animatedCornerRadius(VALUE2, VALUE1, SPEED, SALTO_F);
             animEntradaBordeWidth = new DoubleAnimation(FromWidth, ToWidth, _du);
             animEntradaBordeHeight = new DoubleAnimation(FromHeight, ToHeight, _du);
             animEntradaColor = new ColorAnimation(Color1, Color2, _du);
 
-            animSalida = animatedCornerRadius(VALUE1, VALUE2, SPEED, SALTO_F);
+            animSalida = ClasesDeAnimacionesForFrames.animatedCornerRadius(VALUE1, VALUE2, SPEED, SALTO_F);
             animSalidaBordeWidth = new DoubleAnimation(ToWidth, FromWidth, _du);
             animSalidaBordeHeight = new DoubleAnimation(ToHeight, FromHeight, _du);
             animaSalidaColor = new ColorAnimation(Color2, Color1, _du);
@@ -77,13 +79,13 @@ namespace ServidorBot.Dictionarys
             selectElementEntrada = new DoubleAnimation(SelectElemenWidthP1, SelectElemenWidthP2, _du);
             selectElementSalida = new DoubleAnimation(SelectElemenWidthP2, 0, _du);
 
-        } 
+        }
         private void border_salida(object sender, MouseEventArgs e)
         {
 
             var sb = new Storyboard();
 
-            Button boton = sender as Button;
+            CheckBox boton = sender as CheckBox;
 
             Border border1 = boton.Template.FindName("border_interno", boton) as Border;
             Border border2 = boton.Template.FindName("border_animati", boton) as Border;
@@ -91,14 +93,14 @@ namespace ServidorBot.Dictionarys
 
             var posi = e.GetPosition(border2);
 
-            if(posi.X <= ToWidth)
+            if (posi.X <= ToWidth)
             {
                 return;
             }
 
 
             //-----------------------
-           if(botonSelected != boton)
+            if (botonSelected != boton)
             {
                 if (border1.Background.GetType().Name != "ImageBrush")
                 {
@@ -130,7 +132,7 @@ namespace ServidorBot.Dictionarys
         {
             var sb = new Storyboard();
 
-            Button boton = sender as Button;
+            CheckBox boton = sender as CheckBox;
 
             Border border1 = boton.Template.FindName("border_interno", boton) as Border;
             Border border2 = boton.Template.FindName("border_animati", boton) as Border;
@@ -146,9 +148,9 @@ namespace ServidorBot.Dictionarys
             //-----------------------
 
 
-            if(botonSelected != boton)
+            if (botonSelected != boton)
             {
-                if(border1.Background.GetType().Name != "ImageBrush")
+                if (border1.Background.GetType().Name != "ImageBrush")
                 {
                     sb.Children.Add(animEntradaColor);
                     Storyboard.SetTarget(animEntradaColor, border1);
@@ -177,11 +179,11 @@ namespace ServidorBot.Dictionarys
         private void accion_click(object sender, RoutedEventArgs e)
         {
             var sb = new Storyboard();
-            Button botonPreset = sender as Button;
+            CheckBox botonPreset = sender as CheckBox;
             Border borderBP1 = botonPreset.Template.FindName("border_animati", botonPreset) as Border;
 
             if (botonSelected == botonPreset) return;
-            if (botonSelected != null) 
+            if (botonSelected != null)
             {
                 Border borderS1 = botonSelected.Template.FindName("border_interno", botonSelected) as Border;
                 Border borderS2 = botonSelected.Template.FindName("border_animati", botonSelected) as Border;
@@ -205,44 +207,22 @@ namespace ServidorBot.Dictionarys
                 Storyboard.SetTarget(animSalidaBordeWidth, borderS2);
                 Storyboard.SetTargetProperty(animSalidaBordeWidth, new PropertyPath("(Border.Width)"));
 
+                botonSelected.IsChecked = false;
             }
-                sb.Children.Add(selectElementEntrada);
-                Storyboard.SetTarget(selectElementEntrada, borderBP1);
-                Storyboard.SetTargetProperty(selectElementEntrada, new PropertyPath("(Border.Height)"));
+            sb.Children.Add(selectElementEntrada);
+            Storyboard.SetTarget(selectElementEntrada, borderBP1);
+            Storyboard.SetTargetProperty(selectElementEntrada, new PropertyPath("(Border.Height)"));
 
             Thread.Sleep(150);
+            botonPreset.IsChecked = true;
             botonSelected = botonPreset;
             sb.Begin();
 
 
         }
 
-        private static ObjectAnimationUsingKeyFrames animatedCornerRadius(double To, double From, double Speed, double SaltoFotrograma = 1)
-        {
-            var anim = new ObjectAnimationUsingKeyFrames();
 
-            double Diferencia = (From - To);
 
-            double va = 1;
-
-            if (Diferencia < 0) { Diferencia *= -1; va = -1; }
-
-            for (double i = 1; i <= Diferencia; i += SaltoFotrograma)
-            {
-                ObjectKeyFrame temp = new DiscreteObjectKeyFrame
-                {
-                    Value = new CornerRadius(To + (i * va)),
-                    KeyTime = KeyTime.FromTimeSpan(TimeSpan.FromMilliseconds(Speed * i))
-                };
-
-                //Console.WriteLine($"CorneRadius: {To + (i*va) }, KeyTime: {TimeSpan.FromMilliseconds(Speed * i).ToString()}");
-
-                anim.KeyFrames.Add(temp);
-            }
-
-            return anim;
-        }
-    
 
     }
 }

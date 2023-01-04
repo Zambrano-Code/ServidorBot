@@ -3,51 +3,55 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 
 namespace ServidorBot.src.View.Models
 {
     public class ModelDateTimePicker : ViewModelBase
     {
-        private string _date;
-        private string _time;
-        private string _text;
+        private DateTime _date;
 
-        private int _length;
-
-        public string Date
+        public DateTime Date
         {
             set
             {
-                _date = value;
-                Text = $"{value} {_time}";
-                OnPropertyChanged(nameof(Date));
+                _date = new DateTime(year: value.Year, month: value.Month, day: value.Day, hour: _date.Hour, minute: _date.Minute, second: _date.Second);
+                OnPropertyChanged(nameof(Text));
             }
         }
-        public string Time
+
+        public TimeSpan Time
         {
             set
             {
-                _time = value;
-                Text = $"{_date} {value}";
-                OnPropertyChanged(nameof(Time));
+                _date = new DateTime(year: _date.Year, month: _date.Month, day: _date.Day, hour: value.Hours, minute: value.Minutes, second: value.Seconds);
+                OnPropertyChanged(nameof(Text));
             }
         }
+
         public string Text
         {
             get
             {
-                return _text;
+                //Console.WriteLine(_date.ToString());
+                if (_date != new DateTime())
+                {
+                    return _date.ToString("dd/MM/yyyy H:mm:ss");
+                }
+                return "";
             }
+
+
+        }
+
+        public DateTime DateTime
+        {
+            get { return _date; }
             set
             {
-                _text = value;
+                _date = value;
                 OnPropertyChanged(nameof(Text));
             }
-        }
-        public int Length
-        {
-            get { return _length; }
-            set { _length = value;}
         }
     }
 }

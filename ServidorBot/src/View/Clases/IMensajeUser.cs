@@ -15,6 +15,7 @@ namespace ServidorBot.src.View.Clases
         private string _nombre;
         private string _fecha;
         private string _mensaje;
+        private string _embeds;
         private Brush _icon;
         private List<Border> _img = new();
 
@@ -46,6 +47,12 @@ namespace ServidorBot.src.View.Clases
         {
             get { return _img; }
             set { _img = value; }
+        }
+
+        public string Embeds
+        {
+            get { return _embeds; }
+            set { _embeds = value; }
         }
 
     }

@@ -21,7 +21,7 @@
             <TextBlock Text="{Binding Name}" Margin="10,0,0,0" Foreground="{DynamicResource Windows.TextFondo1}" FontWeight="Bold"/>
             <TextBlock Text="{Binding ElementName=tBox, Path=Text.Length}" Visibility="{Binding VisibleCount}" HorizontalAlignment="Right" Margin="10,2,0,0" Foreground="{DynamicResource Windows.TextFondo2}" FontSize="10"/>
             <TextBlock Text="/" HorizontalAlignment="Right"  Visibility="{Binding VisibleCount}" Foreground="{DynamicResource Windows.TextFondo2}" FontSize="10" Margin="0,2,0,0"/>
-            <TextBlock Text="{Binding Length}" HorizontalAlignment="Right"  Visibility="{Binding VisibleCount}" Foreground="{DynamicResource Windows.TextFondo2}" FontSize="10" Margin="0,2,0,0"/>
+            <TextBlock Text="{Binding Length}" HorizontalAlignment="Right" Visibility="{Binding VisibleCount}" Foreground="{DynamicResource Windows.TextFondo2}" FontSize="10" Margin="0,2,0,0"/>
         </DockPanel>
         <TextBox Style="{DynamicResource TextBoxStyle1}" AcceptsReturn="{Binding Return}" MaxHeight="{Binding  MaxHeight}" x:Name="tBox" MaxLength="{Binding Length}" Grid.Row="1" Margin="5,0" Text="{Binding Text}" VerticalScrollBarVisibility="Visible"/>
 

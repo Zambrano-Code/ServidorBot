@@ -8,14 +8,16 @@
              xmlns:local="clr-namespace:ServidorBot.src.View.ControlsModificados"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid Height="Auto" Margin="0, 5" >
+    <Grid Height="Auto" Margin="0, 10" >
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="30"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="20"/>
-            <RowDefinition Height="auto" MinHeight="15"/>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
 
         <Border VerticalAlignment="Top" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" CornerRadius="15" Background="{Binding Path=Icon}" Width="30" Height="30"/>
@@ -26,8 +28,29 @@
         <TextBlock Grid.Column="1" Grid.Row="1" Padding="8,0,20,0" 
                                    Foreground="#D7D9DA" FontFamily="Cascadia" 
                                    TextWrapping="Wrap" FontSize="15"
-                                   Text="{Binding Path=Mensaje}" />
-        <ItemsControl Grid.Column="1" Grid.Row="1" ItemsSource="{Binding Path=Img}"/>
+                                   Text="{Binding Path=Mensaje}" >
+            <TextBlock.Style>
+                <Style TargetType="{x:Type TextBlock}">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Path=Mensaje}" Value="">
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBlock.Style>
+        </TextBlock>
+        <ItemsControl Grid.Column="1" Grid.Row="2" ItemsSource="{Binding Path=Img}"/>
+        <TextBlock Grid.Column="1" Grid.Row="3" Margin="10,0,0,0" Text="{Binding Path=Embeds}" Foreground="#CB0D36" FontFamily="Bauhaus 93"  FontStyle="Italic">
+            <TextBlock.Style>
+                <Style TargetType="{x:Type TextBlock}">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Path=Embeds}" Value="{x:Null}">
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBlock.Style>
+        </TextBlock>
 
     </Grid>
 </UserControl>

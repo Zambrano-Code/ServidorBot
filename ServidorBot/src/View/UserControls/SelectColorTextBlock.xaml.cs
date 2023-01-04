@@ -28,6 +28,7 @@ namespace ServidorBot.src.View.UserControls
             InitializeComponent();
 
             DataContext = _modelSelectorColorTextBlock;
+
         }
     }
 }

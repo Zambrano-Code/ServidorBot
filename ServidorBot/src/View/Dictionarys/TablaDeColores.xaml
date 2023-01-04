@@ -30,28 +30,34 @@
     <!--#endregion-->
     
     <!--#region CheckBox Selec User-->
-    <SolidColorBrush x:Key="CheckBox.SelectUser.BG.Default" Color="Transparent"/>
-    <SolidColorBrush x:Key="CheckBox.SelectUser.Border.Default" Color="#2F3136"/>
-    <SolidColorBrush x:Key="CheckBox.btnClose.BG.Default" Color="Transparent"/>
-    <SolidColorBrush x:Key="CheckBox.SelectUser.Text.Default" Color="#D7D9DA"/>
-    
-    
+    <SolidColorBrush x:Key="CheckBox.SelectUser.BG.Default" Color="#757E8A"/>
     <SolidColorBrush x:Key="CheckBox.SelectUser.BG.MouseOver" Color="#3C3F45"/>
-    <SolidColorBrush x:Key="CheckBox.SelectUser.Border.MouseOver" Color="#3C3F45"/>
-    <SolidColorBrush x:Key="CheckBox.btnClose.Icon.MouseOver" Color="#FF9A9A9A"/>
-
     <SolidColorBrush x:Key="CheckBox.SelectUser.BG.Checked" Color="#3C3F45"/>
     <SolidColorBrush x:Key="CheckBox.SelectUser.Border.Checked" Color="#3C3F45"/>
-    <SolidColorBrush x:Key="CheckBox.btnClose.Icon.Checked" Color="#FF9A9A9A"/>
+    <SolidColorBrush x:Key="CheckBox.SelectUser.Border.Default" Color="#2F3136"/>
+    <SolidColorBrush x:Key="CheckBox.SelectUser.Border.MouseOver" Color="#3C3F45"/>
+    <SolidColorBrush x:Key="CheckBox.SelectUser.Text.Default" Color="#D7D9DA"/>
+
+
+    <SolidColorBrush x:Key="CheckBox.btnClose.BG.Default" Color="Transparent"/>
+    <SolidColorBrush x:Key="CheckBox.btnClose.Icon.Default" Color="#FF9A9A9A"/>
+    <SolidColorBrush x:Key="CheckBox.btnClose.Icon.MouseOver" Color="#FF9A9A9A"/>
+
     <!--#endregion-->
 
     <!--#region Colores de paguina -->
     <SolidColorBrush x:Key="Windows.BG.Principal" Color="#FF292B2F"/>
     <SolidColorBrush x:Key="Windows.BG.Secundario" Color="#FF36393F"/>
+    <SolidColorBrush x:Key="Windows.BG.Tercero" Color="#2F3136"/>
     <SolidColorBrush x:Key="Windows.Text" Color="White"/>
     <SolidColorBrush x:Key="Windows.TextFondo1" Color="#C1C1C1"/>
     <SolidColorBrush x:Key="Windows.TextFondo2" Color="#A1A1A1"/>
     <!--#endregion-->
 
+    <!--#region Color Animation-->
+    <SolidColorBrush x:Key="Windows.MouseOver" Color="#3DDB8B"/>
+    <SolidColorBrush x:Key="Windows.IsPressed" Color="#8A5F62"/>
+    
+    <!--#endregion-->
 
 </ResourceDictionary>

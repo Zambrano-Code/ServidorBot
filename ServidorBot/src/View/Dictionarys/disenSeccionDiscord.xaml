@@ -1,0 +1,46 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    x:Class="ServidorBot.Dictionarys.disenSeccionDiscord"
+                    >
+
+    <Style x:Key="SeccionDiscord_ButtonStryle1" TargetType="{x:Type CheckBox}">
+        <Setter Property="Foreground" Value="{DynamicResource Windows.TextFondo1}"/>
+        <Setter Property="FontSize" Value="15"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="IsChecked" Value="false"/>
+        <EventSetter Event="Click" Handler="accion_click"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type CheckBox}">
+                    <Grid HorizontalAlignment="Stretch">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="10"/>
+                        </Grid.ColumnDefinitions>
+                        <Border x:Name="border" Margin="0,10" MinHeight="50" Background="{DynamicResource Windows.BG.Principal}" CornerRadius="10,10,10,10" Height="{TemplateBinding Height}" BorderThickness="2,2,2,2" BorderBrush="{DynamicResource Windows.BG.Principal}">
+                            <ContentPresenter x:Name="contentPresenter" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        </Border>
+                        <Border x:Name="Select" Visibility="Hidden" Grid.Column="1" Width="10" Background="{DynamicResource Windows.BG.Secundario}">
+                            <Grid>
+                                <Border CornerRadius="10" Margin="-10" Width="20" Height="20" Background="{DynamicResource Windows.BG.Tercero}" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
+                                <Border CornerRadius="10" Margin="-10" Width="20" Height="20" Background="{DynamicResource Windows.BG.Tercero}" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+
+                            </Grid>
+                        </Border>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="border" Property="BorderBrush" Value="{DynamicResource Windows.BG.Secundario}"/>
+                        </Trigger>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter TargetName="border" Property="Background" Value="{DynamicResource Windows.BG.Secundario}"/>
+                            <Setter TargetName="border" Property="BorderBrush" Value="{DynamicResource Windows.BG.Secundario}"/>
+                            <Setter TargetName="border" Property="CornerRadius" Value="10,0,0,10"/>
+                            <Setter TargetName="Select" Property="Visibility" Value="Visible"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

@@ -7,21 +7,25 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ServidorBot.src.View.UserControls"
              xmlns:model="clr-namespace:ServidorBot.src.View.Models"
-             mc:Ignorable="d" 
+    mc:Ignorable="d" 
              d:DesignHeight="50" d:DesignWidth="100">
     <UserControl.Resources>
         <model:ModelDateTimePicker x:Key="modelView"/>
     </UserControl.Resources>
     <Grid >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="9*"/>
+            <RowDefinition Height="16*"/>
+        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition Width="30"/>
             <ColumnDefinition Width="30"/>
             <ColumnDefinition Width="30"/>
         </Grid.ColumnDefinitions>
-        <TextBox Text="{Binding Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource TextBoxStyle1}" Margin="5,2" MaxLength="256"/>
-        <DatePicker Text="{Binding Date, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Style="{DynamicResource DatePickerStyle1}"/>
-        <local:PickTime Text="{Binding Time, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" Background="{DynamicResource Windows.BG.Principal}" Foreground="{DynamicResource Windows.Text}" />
-        <Button x:Name="Clear" Grid.Column="3" Style="{DynamicResource ButtonDelete}" Click="Clear_Click"/>
+        <TextBox Text="{Binding Text, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource TextBoxStyle1}" Margin="5,2,5,2" MaxLength="256" Grid.RowSpan="2"/>
+        <DatePicker BorderBrush="Bisque" BorderThickness="5" SelectedDateChanged="DatePicker_SelectedDateChanged" Grid.Column="1" Style="{DynamicResource DatePickerStyle1}" Grid.RowSpan="2"/>
+        <local:PickTime Grid.Column="2" Background="{DynamicResource Windows.BG.Principal}" Foreground="{DynamicResource Windows.Text}" Grid.RowSpan="2" TimeSelect="PickTime_TimeSelect"/>
+        <Button x:Name="Clear" Grid.Column="3" Style="{DynamicResource ButtonDelete}" Click="Clear_Click" Grid.RowSpan="2"/>
     </Grid>
 </UserControl>

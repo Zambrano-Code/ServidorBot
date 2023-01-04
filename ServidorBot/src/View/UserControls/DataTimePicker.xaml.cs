@@ -21,18 +21,38 @@ namespace ServidorBot.src.View.UserControls
     /// </summary>
     public partial class DataTimePicker : UserControl
     {
-        public ModelDateTimePicker _modelDateTimePicker { get; set; } = new ModelDateTimePicker();
-
         public DataTimePicker()
         {
             InitializeComponent();
 
-            DataContext = _modelDateTimePicker;
         }
 
         private void Clear_Click(object sender, RoutedEventArgs e)
         {
-            _modelDateTimePicker.Text = "";
+            ModelDateTimePicker dtp = DataContext as ModelDateTimePicker;
+            dtp.Date = new DateTime();
+            dtp.Time = new TimeSpan();
+        }
+
+        private void DatePicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ModelDateTimePicker dtp = DataContext as ModelDateTimePicker;
+
+            e.Handled = true;
+            //dp.SelectedDate = 
+            foreach (var a in e.AddedItems)
+            {
+
+                Console.WriteLine(a);
+                dtp.Date = DateTime.Parse(a.ToString());
+            }
+        }
+
+        private void PickTime_TimeSelect(PickTime pt, TimeSpan Msg)
+        {
+            ModelDateTimePicker dtp = DataContext as ModelDateTimePicker;
+
+            dtp.Time = pt.Time;
         }
     }
 }

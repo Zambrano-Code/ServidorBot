@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ServidorBot"
-        xmlns:controls="clr-namespace:ServidorBot.src.view.UserControls" xmlns:UserControls="clr-namespace:ServidorBot.src.View.UserControls" x:Class="ServidorBot.MainWindow"
+        xmlns:UC="clr-namespace:ServidorBot.src.View.UserControls" x:Class="ServidorBot.MainWindow"
         mc:Ignorable="d"
         Title="MainWindow" Height="710" Width="1200" Background="Transparent" WindowStyle="None" AllowsTransparency="True"
         WindowStartupLocation="CenterScreen"
@@ -15,7 +15,6 @@
             <DropShadowEffect BlurRadius="8" RenderingBias="Quality" Color="#f00" ShadowDepth="0" Direction="0" />
         </Border.Effect>
         <Grid Height="700">
-
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="80"/>
                 <ColumnDefinition/>
@@ -26,19 +25,34 @@
 
             </Grid.RowDefinitions>
 
-            <!--<UserControls:BarraPrincipal Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Text="Secretaria Bot"/>-->
+            <UC:BarraPrincipal Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" DataContext="{Binding BarraPrincipal}"/>
 
-            <Border Grid.Row="2" Grid.Column="0" CornerRadius="0,0,0,5" Background="{DynamicResource Windows.BG.Principal}">
+            <Border Grid.Row="2" Grid.Column="0" CornerRadius="0,0,0,10" Background="{DynamicResource Windows.BG.Principal}">
                 <Grid x:Name="Grid_Cole"  >
-                    <Button x:Name="Buttons" Style="{DynamicResource buttonDinamic}" Content="" Click="Buttons_Click"/>
+                    <Grid.Resources>
+                        <Style TargetType="{x:Type ListBoxItem}">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                                        <Border>
+                                            <ContentPresenter x:Name="contentPresenter"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </Grid.Resources>
+                    <CheckBox x:Name="Buttons" Style="{DynamicResource buttonDinamic}" Content="" Click="Buttons_Click"/>
                     <Path Data="M9.75,77.75 L59.25,77.5" Fill="#36393F" HorizontalAlignment="Center" Height="2" Margin="0,75,0,0" Stroke="#36393F" Stretch="Fill" StrokeStartLineCap="Round" StrokeEndLineCap="Round" VerticalAlignment="Top" Width="50" StrokeThickness="2"/>
-                    <StackPanel x:Name="List_Servidores" Background="Transparent" Height="603" Margin="0,77,0,0" >
-                    </StackPanel>
+                    <ListBox x:Name="List_Servidores" ItemsSource="{Binding ListaServidores}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Background="Transparent" BorderThickness="0" Height="603" Margin="0,77,0,0" >
+                    </ListBox>
                 </Grid>
             </Border>
 
-            <Border Grid.Row="2" Grid.Column="2" CornerRadius="0,0,5,0" Background="{DynamicResource Windows.BG.Secundario}">
-                <Frame Source="../page/SeccionMensaje.xaml" NavigationUIVisibility="Hidden" /> 
+            <Border Grid.Row="2" Grid.Column="2" CornerRadius="0,0,10,0" Background="{DynamicResource Windows.BG.Principal}">
+                <Border CornerRadius="25,0,10,0" Background="{DynamicResource Windows.BG.Tercero}">
+                    <Frame x:Name="frame" Source="" NavigationUIVisibility="Hidden"/> 
+                </Border>
             </Border>
 
 

@@ -11,7 +11,11 @@
     <None Remove="src\View\Dictionarys\iconCode.png" />
     <None Remove="src\View\Dictionarys\icons8-calendar-1.png" />
     <None Remove="src\View\Dictionarys\icons8-calendar-2.png" />
-    <None Remove="src\View\Page\PlaceHolder.png" />
+    <None Remove="src\View\Dictionarys\icons8-calendar-3.png" />
+    <None Remove="src\View\img\icons8-calendar-3.png" />
+    <None Remove="src\View\img\PlaceHolder.png" />
+    <None Remove="src\View\Pages\PlaceHolder.png" />
+    <None Remove="src\View\Windows\icons8-calendar-3.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -27,10 +31,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="src\View\Dictionarys\iconCode.png" />
-    <Resource Include="src\View\Dictionarys\icons8-calendar-1.png" />
-    <Resource Include="src\View\Dictionarys\icons8-calendar-2.png" />
-    <Resource Include="src\View\Page\PlaceHolder.png" />
+    <Resource Include="src\View\img\iconCode.png" />
+    <Resource Include="src\View\img\icons8-calendar-1.png" />
+    <Resource Include="src\View\img\icons8-calendar-2.png" />
+    <Resource Include="src\View\img\icons8-calendar-3.png" />
+    <Resource Include="src\View\img\PlaceHolder.png" />
   </ItemGroup>
 
 </Project>

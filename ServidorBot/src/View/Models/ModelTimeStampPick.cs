@@ -9,7 +9,7 @@ namespace ServidorBot.src.View.Models
     public class ModelTimeStampPick
     {
         public string Text { get; set; }
-        public string Time { get; set; }
+        public ModelDateTimePicker DateTime { get; set; } = new ModelDateTimePicker();
         public int Length { get; set; }
 
 

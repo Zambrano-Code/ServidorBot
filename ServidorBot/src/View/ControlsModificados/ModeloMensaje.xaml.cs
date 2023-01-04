@@ -40,6 +40,9 @@ namespace ServidorBot.src.View.ControlsModificados
             dat.Mensaje = mensaje.Content;
             dat.Icon = getImg(mensaje.Author.GetAvatarUrl(), "../../../src/View/img/IconUser.png");
 
+            var a = mensaje.Embeds.ToList();
+            if (a.Count != 0) dat.Embeds = $"El mensaje tiene {a.Count} embeds, y no se puede visualizar";
+
             this.Dispatcher.Invoke(async () =>
             {
 

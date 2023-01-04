@@ -15,14 +15,12 @@
         AllowsTransparency="True"
         >
 
-    <Window.Resources>
-        <viewM:ModeloViewCreateEmbed x:Key="ModeloViewCreateEmbed"/>
-    </Window.Resources>
     <Border Background="{DynamicResource Windows.BG.Principal}" CornerRadius="10" Margin="10">
 
         <Border.Effect>
             <DropShadowEffect BlurRadius="8" RenderingBias="Quality" Color="#555" ShadowDepth="0" Direction="0" />
         </Border.Effect>
+
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
@@ -30,71 +28,80 @@
             <Grid.RowDefinitions>
                 <RowDefinition MaxHeight="25"/>
                 <RowDefinition/>
+                <RowDefinition Height="50"/>
 
             </Grid.RowDefinitions>
 
-            <UserC:BarraPrincipal Grid.Column="0" Grid.Row="0" DataContext="{Binding BarraPrincipal}"  />
+            <UserC:BarraPrincipal Grid.Column="0" Grid.Row="0" DataContext="{Binding ElementName=cE, Path=BarraPrincipal}"  />
 
-            <Grid Grid.Row="1" DataContext="{Binding Source={StaticResource ModeloViewCreateEmbed}}">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                </Grid.RowDefinitions>
-
-                <Grid Grid.Row="0" Margin="10,0">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
+            <ScrollViewer Grid.Row="1" Margin="5,0,5,10">
+                <Grid DataContext="{Binding ElementName=cE, Path=ViewCreateEmbed}">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="25"/>
-                        <RowDefinition Height="55"/>
-                        <RowDefinition Height="55"/>
-                    </Grid.RowDefinitions>
-                    <Label Content="Author" Grid.Row="0" Foreground="{DynamicResource Windows.Text}"/>
-
-                    <UserC:TextBoxLimText DataContext="{Binding AuthorName_modelTextmodelText}" Grid.Row="1" Height="50" Grid.Column="0" Grid.ColumnSpan="2"/>
-                    <UserC:TextBoxLimText DataContext="{Binding AuthorURL_modelTextmodelText}" Grid.Row="2" Height="50" Grid.Column="0"/>
-                    <UserC:TextBoxLimText DataContext="{Binding AuthorURLIcon_modelTextmodelText}" Grid.Row="2" Height="50" Grid.Column="1"/>
-                </Grid>
-
-                <Grid Grid.Row="1" Margin="10,5">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="55"/>
-                        <RowDefinition MinHeight="80"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
                     </Grid.RowDefinitions>
 
-                    <UserC:TextBoxLimText DataContext="{Binding Title_modelTextmodelText}" Grid.Row="0" Height="50" />
-                    <UserC:TextBoxLimText DataContext="{Binding Description_modelTextmodelText}" Grid.Row="1"/>
+                    <Grid Grid.Row="0" Margin="10,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="55"/>
+                            <RowDefinition Height="55"/>
+                        </Grid.RowDefinitions>
+                        
+                        <UserC:TextBoxLimText DataContext="{Binding AuthorName_modelTextmodelText}" Grid.Row="0" Height="50" Grid.Column="0" Grid.ColumnSpan="2"/>
+                        <UserC:TextBoxLimText DataContext="{Binding AuthorURL_modelTextmodelText}" Grid.Row="1" Height="50" Grid.Column="0"/>
+                        <UserC:TextBoxLimText DataContext="{Binding AuthorURLIcon_modelTextmodelText}" Grid.Row="1" Height="50" Grid.Column="1"/>
+                    </Grid>
+
+                    <Grid Grid.Row="1" Margin="10,5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="55"/>
+                            <RowDefinition MinHeight="80"/>
+                        </Grid.RowDefinitions>
+
+                        <UserC:TextBoxLimText DataContext="{Binding Title_modelTextmodelText}" Grid.Row="0" Height="50" />
+                        <UserC:TextBoxLimText DataContext="{Binding Description_modelTextmodelText}" Grid.Row="1"/>
+                    </Grid>
+
+                    <Grid Grid.Row="3" Margin="10,5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="55"/>
+                            <RowDefinition MinHeight="55"/>
+                            <RowDefinition MinHeight="55"/>
+                            <RowDefinition MinHeight="55"/>
+                            <RowDefinition MinHeight="55"/>
+                        </Grid.RowDefinitions>
+
+                        <UserC:TextBoxLimText DataContext="{Binding URLTitle_modelTextmodelText}" Grid.Row="0" Grid.Column="0" Height="50" />
+                        <UserC:SelectColorTextBlock DataContext="{Binding Color_modelSelectorColorTextBlock}" Height="50" Margin="10,0,0,0" Grid.Row="0" Grid.Column="1"/>
+                        <UserC:TextBoxLimText DataContext="{Binding ImageURL_modelTextmodelText}" Grid.Row="1" Height="50" />
+                        <UserC:TextBoxLimText DataContext="{Binding ThumbnailURL_modelTextmodelText}" Grid.Row="1" Grid.Column="1" Height="50" />
+                        <UserC:TextBoxLimText DataContext="{Binding FooterText_modelTextmodelText}" Grid.Row="2" Grid.ColumnSpan="2" Height="50" />
+                        <UserC:TextBoxLimText DataContext="{Binding FooterTextURL_modelTextmodelText}" Grid.Row="3" Grid.Column="1" Height="50" />
+                        <UserC:TimeStampPick DataContext="{Binding TimeStamp_ModelTimeStampPick}" Grid.Row="3" Grid.Column="0"/>
+                        <UserC:AddFields DataContext="{Binding AddField_ModeloAddFields}" Grid.Row="4" Grid.ColumnSpan="2"/>
+
+
+                    </Grid>
                 </Grid>
 
-                <Grid Grid.Row="3" Margin="10,5">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="55"/>
-                        <RowDefinition MinHeight="55"/>
-                        <RowDefinition MinHeight="55"/>
-                        <RowDefinition MinHeight="55"/>
-                    </Grid.RowDefinitions>
-
-                    <UserC:TextBoxLimText DataContext="{Binding URLTitle_modelTextmodelText}" Grid.Row="0" Grid.Column="0" Height="50" />
-                    <UserC:SelectColorTextBlock DataContext="{Binding Color_modelSelectorColorTextBlock}" Height="50" Margin="10,0,0,0" Grid.Row="0" Grid.Column="1"/>
-                    <UserC:TextBoxLimText DataContext="{Binding ImageURL_modelTextmodelText}" Grid.Row="1" Height="50" />
-                    <UserC:TextBoxLimText DataContext="{Binding ThumbnailURL_modelTextmodelText}" Grid.Row="1" Grid.Column="1" Height="50" />
-                    <UserC:TextBoxLimText DataContext="{Binding FooterText_modelTextmodelText}" Grid.Row="2" Grid.ColumnSpan="2" Height="50" />
-                    <UserC:TextBoxLimText DataContext="{Binding FooterTextURL_modelTextmodelText}" Grid.Row="3" Grid.Column="1" Height="50" />
-                    <UserC:TimeStampPick DataContext="{Binding TimeStamp_ModelTimeStampPick}" Grid.Row="3" Grid.Column="0"/>
-
-                </Grid>
-            </Grid>
-
+            </ScrollViewer>
+            <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Center" Margin="0,0,0,10">
+                <Button Style="{DynamicResource ButtonCreateEmbedCancel}" HorizontalAlignment="Center" Width="100" Margin="25,0,50,0" Content="Cancel" Click="Button_ClickCancel"/>
+                <Button Style="{DynamicResource ButtonCreateEmbedCancel}" HorizontalAlignment="Center" Width="100" Margin="50,0,25,0" Content="Listo" Click="Button_ClickAcepted"/>
+            </StackPanel>
         </Grid>
+
     </Border>
 </Window>

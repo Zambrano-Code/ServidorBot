@@ -1,0 +1,71 @@
+﻿<UserControl x:Class="ServidorBot.src.View.UserControls.AddFields"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ServidorBot.src.View.UserControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <Style TargetType="{x:Type ListBoxItem}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                        <Border x:Name="Bd" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Padding="{TemplateBinding Padding}" SnapsToDevicePixels="true">
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="50"/>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="50"/>
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Button x:Name="AddItem" Click="AddItem_Click" Width="30" Height="30" HorizontalAlignment="Stretch" Style="{DynamicResource buttonPlus}" RenderTransformOrigin="0.5,0.5"/>
+        <DockPanel Grid.Column="1" >
+            <TextBlock DockPanel.Dock="Left" Text="Add Field"  Foreground="{DynamicResource Windows.TextFondo1}" VerticalAlignment="Center" FontSize="12" FontWeight="Bold"/>
+            <TextBlock DockPanel.Dock="Right" Text="{Binding ListMax}" Foreground="{DynamicResource Windows.TextFondo1}" VerticalAlignment="Center" FontSize="12" FontWeight="Bold" HorizontalAlignment="Right"/>
+            <TextBlock DockPanel.Dock="Right" Text="/" Foreground="{DynamicResource Windows.TextFondo1}" VerticalAlignment="Center" FontSize="12" FontWeight="Bold" HorizontalAlignment="Right"/>
+            <TextBlock DockPanel.Dock="Right" Text="{Binding EmbedFieldBuilders.Count}" Grid.Column="1" Foreground="{DynamicResource Windows.TextFondo1}" VerticalAlignment="Center" FontSize="12" FontWeight="Bold" HorizontalAlignment="Right"/>
+        </DockPanel>
+        <Button x:Name="RemoveItem" Grid.Column="2" Click="RemoveItem_Click" Width="30" Height="30" HorizontalAlignment="Stretch" Style="{DynamicResource buttonRemove}" RenderTransformOrigin="0.5,0.5"/>
+        <TextBlock Text="Remove Text" Grid.Column="3" Foreground="{DynamicResource Windows.TextFondo1}" VerticalAlignment="Center" FontSize="12" FontWeight="Bold"/>
+        <Border Grid.Row="1" Grid.ColumnSpan="4" CornerRadius="3" MinWidth="400" MinHeight="20" Background="{DynamicResource Windows.BG.Principal}" HorizontalAlignment="Center">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="8" RenderingBias="Quality" Color="#000" ShadowDepth="0" Direction="0" />
+            </Border.Effect>
+            <ListBox x:Name="listBox" ItemsSource="{Binding EmbedFieldBuilders}" Margin="0,0,0,10" MaxHeight="380" Background="Transparent" BorderThickness="0" ScrollViewer.CanContentScroll="False" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Border IsEnabled="True">
+                            <Grid MinWidth="450" Margin="0,10">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="25"/>
+                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="0.2*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <TextBlock Text="{Binding Index}" FontSize="13" FontWeight="Bold" Foreground="{DynamicResource Windows.TextFondo1}" Margin="5,0,0,0"/>
+                                <local:TextBoxLimText Grid.Column="1" DataContext="{Binding ModelTextBoxLimName}" Height="50"/>
+                                <local:TextBoxLimText Grid.Row="1" Grid.Column="1"  DataContext="{Binding ModelTextBoxLimValue}" MinHeight="50"/>
+                                <CheckBox Grid.Column="2" Grid.RowSpan="2" VerticalAlignment="Top" FontSize="13" FontWeight="Bold" Margin="10,25,0,0" Content="{Binding ModelTextBoxLimInline}" IsChecked="{Binding ModelTextBoxLimInlineChecked}" Foreground="{DynamicResource Windows.TextFondo1}"/>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Border>
+    </Grid>
+</UserControl>

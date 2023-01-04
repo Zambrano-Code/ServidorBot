@@ -16,6 +16,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using static ServidorBot.src.Datos.Labels;
+using static ServidorBot.src.View.Windows.createEmbed;
 
 namespace ServidorBot.src.View.UserControls
 {
@@ -36,7 +38,7 @@ namespace ServidorBot.src.View.UserControls
 
         public static readonly DependencyProperty ForegroundProperty = DependencyProperty.Register("Foreground", typeof(Brush), typeof(PickTime));
 
-        public static readonly DependencyProperty TextProperty = DependencyProperty.Register("Text", typeof(string), typeof(UserControl));
+        public static readonly DependencyProperty DateTimeProperty = DependencyProperty.Register("Time", typeof(TimeSpan), typeof(PickTime));
 
         public Brush Background
         {
@@ -53,13 +55,14 @@ namespace ServidorBot.src.View.UserControls
             get { return (Brush)GetValue(ForegroundProperty); }
             set { SetValue(ForegroundProperty, value); }
         }
-        public string Text
+        public TimeSpan Time
         {
-            get { return (string)GetValue(TextProperty); }
-            set { SetValue(TextProperty, value); }
+            get { return (TimeSpan)GetValue(DateTimeProperty); }
+            set { SetValue(DateTimeProperty, value); }
         }
 
-
+        public delegate void TimeSelectEvent(PickTime pt, TimeSpan Msg);
+        public event TimeSelectEvent TimeSelect;
 
         #endregion
 
@@ -160,8 +163,12 @@ namespace ServidorBot.src.View.UserControls
 
         private void ok_Click(object sender, RoutedEventArgs e)
         {
-            Text = $"{HorasSlots.Select}:{MinutosSlots.Select}:{SegundoSlots.Select}";
+            Time = new TimeSpan(HorasSlots.Select, MinutosSlots.Select, SegundoSlots.Select);
             Popup_Picker.IsOpen = false;
+
+
+            if (TimeSelect != null)
+                TimeSelect(this, Time);
         }
 
         private void Cancel_Click(object sender, RoutedEventArgs e)
@@ -178,9 +185,9 @@ namespace ServidorBot.src.View.UserControls
 
         private void fijateHora(int horas, int minutos, int segundos)
         {
-            HorasSlots.Select = horas.ToString();
-            MinutosSlots.Select = minutos.ToString();
-            SegundoSlots.Select = segundos.ToString();
+            HorasSlots.Select = horas;
+            MinutosSlots.Select = minutos;
+            SegundoSlots.Select = segundos;
         }
     }
 
@@ -370,21 +377,21 @@ namespace ServidorBot.src.View.UserControls
             if (slot_3 == num2) { Down(); Down(); Down(); }
         }
 
-        public string Select
+        public int Select
         {
             set
             {
-                var i = int.Parse(value);
+                var i = value;
                 Slot3 = getSlot(i, 3).ToString();
                 Slot2 = getSlot(i, 2).ToString();
                 Slot1 = getSlot(i, 1).ToString();
-                Slot0 = value;
+                Slot0 = value.ToString();
                 Slot_1 = getSlot(i, -1).ToString();
                 Slot_2 = getSlot(i, -2).ToString();
                 Slot_3 = getSlot(i, -3).ToString();
 
             }
-            get { return Slot0; }
+            get { return slot0; }
         }
 
         private int getSlot(int sl, int cant)

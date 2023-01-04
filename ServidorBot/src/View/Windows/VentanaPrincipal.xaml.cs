@@ -1,29 +1,20 @@
 ﻿using bot;
-using bot.modelos;
-using Discord;
 using Discord.WebSocket;
-using Microsoft.VisualBasic;
-using ServidorBot.src.view.UserControls;
+using ServidorBot.src.View.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net.Sockets;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.Windows.Threading;
-using System.Windows.Media;
+using ServidorBot.src.Datos;
+using System.Collections.ObjectModel;
+using ServidorBot.src.View.ControlsModificados;
+using ServidorBot.src.View.UserControls;
+using ServidorBot.src.View.Pages;
 
 namespace ServidorBot
 {
@@ -32,22 +23,34 @@ namespace ServidorBot
     /// </summary>
     public partial class MainWindow : Window
     {
-        private Bot bot = new Bot();
 
-        private List<CheckBox> listDm = new List<CheckBox>();
+        private ModeloVentanaPrincipal _modeloVentanaPrincipal;
+
         public MainWindow()
         {
+            _modeloVentanaPrincipal = new ModeloVentanaPrincipal()
+            {
+                BarraPrincipal = new ModelBarraPrincipal()
+                {
+                    Title = Labels.NickWindowsMain,
+                    ViewWindow = this
+                },
+            };
+
             llamada_bot();
 
             InitializeComponent();
             this.Visibility = Visibility.Hidden;
 
             crearVentana();
+
+
+            DataContext = _modeloVentanaPrincipal;
         }
 
         private async void llamada_bot()
         {
-            await bot.MainAsyn();
+            await _modeloVentanaPrincipal.Bot.MainAsyn();
 
         }
 
@@ -77,7 +80,7 @@ namespace ServidorBot
 
                 foreach (SocketGuild guild in guilds)
                 {
-                    Button temp = new Button();
+                    CheckBoxSVChannel temp = new CheckBoxSVChannel(guild);
                     temp.Style = (Style)this.FindResource("buttonDinamicServer00");
                     temp.Name = "bor";
 
@@ -117,10 +120,15 @@ namespace ServidorBot
 
                         temp.Background = img;
                     }
+                    temp.Checked += (object sender, RoutedEventArgs e) =>
+                    {
+                        frame.Navigate(new SeccionDiscordEventos(temp._guild));
+                    };
 
-                    List_Servidores.Children.Add(temp);
+                    _modeloVentanaPrincipal.ListaServidores.Add(temp);
 
 
+                    frame.Navigate(new SeccionMensaje());
 
                 }
                 this.Visibility = Visibility.Visible;
@@ -131,10 +139,10 @@ namespace ServidorBot
 
         }
 
-        
-
-        
-
+        private void Temp_Checked(object sender, RoutedEventArgs e)
+        {
+            Console.WriteLine();
+        }
 
         private async Task Relog(TimeSpan time1, TimeSpan time2, Action evento)
         {
@@ -152,27 +160,17 @@ namespace ServidorBot
             }
         }
 
-        //------------------------
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
-
-        }
-
-        private void Windows_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            if (e.LeftButton == MouseButtonState.Pressed)
-                DragMove();
-        }
-
         private void Buttons_Click(object sender, RoutedEventArgs e)
         {
-            
-
+            var a = new Uri(Labels.UrlPage);
+            if (frame.Source != a) frame.Source = a;
         }
 
-        
+        //------------------------
+
+
+
+
 
     }
 }

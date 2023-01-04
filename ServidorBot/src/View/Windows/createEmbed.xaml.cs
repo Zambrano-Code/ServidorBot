@@ -1,4 +1,6 @@
-﻿using ServidorBot.src.View.Models;
+﻿using Discord;
+using ServidorBot.src.View.Models;
+using ServidorBot.src.View.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,9 +11,12 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using static ServidorBot.src.View.Models.ModelBarraPrincipal;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace ServidorBot.src.View.Windows
 {
@@ -27,36 +32,91 @@ namespace ServidorBot.src.View.Windows
         public ModelBarraPrincipal BarraPrincipal
         {
             get { return _barraPrincipal; }
-            set
-            {
-                //Se le arrega el codicional para que no remplace el Elemento ventana o dara error al cerrar o interacturar
-                if (_barraPrincipal == value) { return; }
-                _barraPrincipal = value;
-                //OnPropertyChanged(nameof(BarraPrincipal));
-            }
         }
+
+        private ModeloViewCreateEmbed _modeloViewCreateEmbed;
+
+        public ModeloViewCreateEmbed ViewCreateEmbed
+        {
+            get { return _modeloViewCreateEmbed; }
+            set { _modeloViewCreateEmbed = value; }
+        }
+
+        public delegate void EmbedCreado(EmbedBuilder Msg);
+        public event EmbedCreado embedCreate;
         #endregion
 
-        public createEmbed()
+        public createEmbed(ModeloViewCreateEmbed model)
         {
             #region Configuracion Ventana
-            BarraPrincipal = new ModelBarraPrincipal()
+            _barraPrincipal = new ModelBarraPrincipal()
             {
                 Title = Datos.Labels.NickWindowsCreateEmbed,
                 Maximize = Visibility.Collapsed,
                 ViewWindow = this
             };
+
+            ViewCreateEmbed = model;
             #endregion
 
             InitializeComponent();
             DataContext = this;
         }
 
-        public void getEmbed()
+        private void Button_ClickCancel(object sender, RoutedEventArgs e)
         {
-            this.ShowDialog();
-            Visibility = Visibility.Visible;
+            this.Close();
         }
 
+        private void Button_ClickAcepted(object sender, RoutedEventArgs e)
+        {
+            List<EmbedFieldBuilder> listField;
+            try
+            {
+                listField = ViewCreateEmbed.AddField_ModeloAddFields.getList();
+            }
+            catch (Exception ex)
+            {
+                listField = new List<EmbedFieldBuilder>();
+                errorField();
+            }
+
+            if (
+                string.IsNullOrEmpty(ViewCreateEmbed.AuthorName_modelTextmodelText.Text) &&
+                string.IsNullOrEmpty(ViewCreateEmbed.Title_modelTextmodelText.Text) &&
+                string.IsNullOrEmpty(ViewCreateEmbed.Description_modelTextmodelText.Text) &&
+                string.IsNullOrEmpty(ViewCreateEmbed.FooterText_modelTextmodelText.Text) &&
+                listField.Count == 0
+                )
+            {
+                errorEmbed();
+                return;
+            }
+
+
+
+            this.Close();
+
+            if (EmbedYaCreado != null)
+                EmbedYaCreado(ViewCreateEmbed.getEmbed());
+
+        }
+
+        private void errorEmbed()
+        {
+            MessageBox.Show(Datos.Labels.ViewCreateEmbed.MensajeEmbedError, "Error");
+        }
+
+        private void errorField()
+        {
+            MessageBox.Show(Datos.Labels.ViewCreateEmbed.MensajeFieldError, "Error");
+        }
+
+        protected virtual void EmbedYaCreado(EmbedBuilder emb)
+        {
+            EmbedCreado tmp = embedCreate;
+            if (tmp != null)
+                tmp(emb);
+        }
     }
 }

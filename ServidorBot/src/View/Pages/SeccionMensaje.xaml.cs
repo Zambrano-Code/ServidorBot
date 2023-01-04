@@ -2,27 +2,19 @@
 using Discord;
 using ServidorBot.src.View.ControlsModificados;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Runtime.Intrinsics.Arm;
-using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using ServidorBot.src.View.Clases;
 using ServidorBot.src.View.Windows;
+using ServidorBot.src.View.ViewModels;
 
-namespace ServidorBot.src.View.Dictionarys
+namespace ServidorBot.src.View.Pages
 {
     /// <summary>
     /// Lógica de interacción para SeccionMensaje.xaml
@@ -35,20 +27,17 @@ namespace ServidorBot.src.View.Dictionarys
             {UserStatus.Offline, "#757E8A" }
         };
         private CheckBoxDMChannel userCheck;
-        private createEmbed _cE = new createEmbed();
         public ObservableCollection<ModeloMensaje> _MUC { get; set; }
-
+        public ObservableCollection<NumerEmbed> _EmbedsForEnviar { get; set; } 
+        public ObservableCollection<CheckBoxDMChannel> _UserChannel { get; set; } 
 
         public SeccionMensaje()
         {
             _MUC = new ObservableCollection<ModeloMensaje>();
+            _EmbedsForEnviar = new ObservableCollection<NumerEmbed>();
+            _UserChannel = new ObservableCollection<CheckBoxDMChannel>();
 
-            Bot._cliente.Ready += () =>
-            {
-                cargarUsers();
-                return Task.CompletedTask;
-            };
-
+            cargarUsers();
             Bot._cliente.MessageReceived += _cliente_MessageReceived;
 
             InitializeComponent();
@@ -108,7 +97,7 @@ namespace ServidorBot.src.View.Dictionarys
             botn.Checked += accionForOptions;
 
 
-            Colum_select.Children.Add(botn);
+            _UserChannel.Add(botn);
         }
 
         private async void cargarMensajes(int lim)
@@ -192,6 +181,7 @@ namespace ServidorBot.src.View.Dictionarys
             CheckBoxDMChannel boxChecke = sender as CheckBoxDMChannel;
 
             if (boxChecke == userCheck) return;
+            if (!ButtonCreateEmbed.IsEnabled) ButtonCreateEmbed.IsEnabled = true;
 
             userCheck = boxChecke;
 
@@ -222,20 +212,104 @@ namespace ServidorBot.src.View.Dictionarys
 
                 string temp = txtBody.Text.Replace("\n", "").Replace("\r", "");
 
-                if (String.IsNullOrEmpty(temp)) return;
+                if (String.IsNullOrEmpty(temp) && _EmbedsForEnviar.Count == 0) return;
 
                 //Console.WriteLine($"value: '{temp2}' leng: {temp2.Length}");
-                var i2 = userCheck._iDMChannel.SendMessageAsync(txtBody.Text).Result;
-                _MUC.Add(new ModeloMensaje(i2));
-                txtBody.Text = "";
+
+                List<Embed> list = new List<Embed>();
+                foreach (var i in _EmbedsForEnviar)
+                {
+                    list.Add(i.embedBuilder.Build());
+                }
+
+                try
+                {
+                    var i2 = userCheck._iDMChannel.SendMessageAsync(txtBody.Text, embeds: list.ToArray()).Result;
+                    _MUC.Add(new ModeloMensaje(i2));
+                    txtBody.Text = "";
+
+                    if(ConfiguracionView.RemoveEmbedAfterSendMessage) _EmbedsForEnviar.Clear();
+
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
             }
 
         }
 
         private void button_CrearEmbed(object sender, RoutedEventArgs e)
         {
-            _cE.getEmbed();
+            createEmbed _cE = new createEmbed(new ModeloViewCreateEmbed(new EmbedBuilder()));
+            _cE.embedCreate += _cE_embedCreate;
+
+            _cE.ShowDialog();
 
         }
+
+        private void _cE_embedCreate(EmbedBuilder Msg)
+        {
+            _EmbedsForEnviar.Add(new NumerEmbed()
+            {
+                embedBuilder = Msg,
+                numer = NumerEmbed.cont,
+            });
+
+            NumerEmbed.cont++;
+        }
+
+        private void ButtonDeleteEmbed_Click(object sender, RoutedEventArgs e)
+        {
+            var button = sender as Button;
+            NumerEmbed temp = button.DataContext as NumerEmbed;
+            _EmbedsForEnviar.Remove(temp);
+
+            NumerEmbed.cont = 1;
+            foreach (var i in _EmbedsForEnviar)
+            {
+                i.numer = NumerEmbed.cont;
+                NumerEmbed.cont++;
+            }
+
+        }
+
+        private void Edited_embed(object sender, RoutedEventArgs e)
+        {
+            var butt = (Button)sender;
+            var dt = butt.DataContext as NumerEmbed;
+            createEmbed _cE = new createEmbed(new ModeloViewCreateEmbed(dt.embedBuilder));
+            
+            _cE.embedCreate += (EmbedBuilder Msg) =>
+            {
+                dt.embedBuilder = Msg;
+
+            };
+
+            _cE.ShowDialog();
+        }
+
+        
     }
+
+    public class NumerEmbed : ViewModelBase
+    {
+        public static int cont = 1;
+        public EmbedBuilder embedBuilder { get; set; }
+
+        private int _numer;
+        public int numer
+        {
+            get
+            {
+                return _numer;
+            }
+            set
+            {
+                _numer = value;
+                OnPropertyChanged(nameof(numer));
+            }
+        }
+    }
+
 }
