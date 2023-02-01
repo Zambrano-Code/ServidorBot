@@ -18,7 +18,7 @@ namespace bot.actividad
 {
     public class CargaDeMessage
     {
-        private Dictionary<int, Mensage> collecionMensageRepetitive;
+        private Dictionary<int, Mensage> collecionMensage;
 
         private configJson config = new configJson();
 
@@ -30,7 +30,7 @@ namespace bot.actividad
             cargarTabla();
 
         }
-        public bool agregarMRepetitivo(Mensage mensage)
+        public bool agregarMensage(Mensage mensage)
         {
          
             if (dbMessage.verificInTable(mensage.name) == 1)
@@ -45,7 +45,7 @@ namespace bot.actividad
                 if (vr)
                 {
                     int id = dbMessage.obtenerIdForName(mensage.name);
-                    collecionMensageRepetitive.Add(id, new Mensage(mensage.name, mensage.mensage, mensage.embed, mensage.canalEnvio));
+                    collecionMensage.Add(id, new Mensage(mensage.name, mensage.mensage, mensage.embeds, mensage.canal_envio, mensage.guild_envio, mensage.user_create));
                     return true;
 
                 }
@@ -60,13 +60,13 @@ namespace bot.actividad
 
         }
 
-        public bool updateMRepetitivo(int id, Mensage mensage)
+        public bool updateMensage(int id, Mensage mensage)
         {
             bool vr = dbMessage.updateRow(id, mensage);
 
             if (vr)
             {
-                collecionMensageRepetitive[id] = new Mensage(mensage.name, mensage.mensage, mensage.embed, mensage.canalEnvio);
+                collecionMensage[id] = new Mensage(mensage.name, mensage.mensage, mensage.embeds, mensage.canal_envio, mensage.guild_envio, mensage.user_create);
 
                 return true;
             }
@@ -78,7 +78,7 @@ namespace bot.actividad
         {
             try
             {
-                collecionMensageRepetitive = dbMessage.getTable();
+                collecionMensage = dbMessage.getTable();
 
             }
             catch (MySqlException ex)
@@ -96,9 +96,9 @@ namespace bot.actividad
 
         public void activarMensage(int id)
         {
-            collecionMensageRepetitive[id].ejecutarMensage();
+            collecionMensage[id].ejecutarMensage();
         }
 
-        public Dictionary<int, Mensage> get() { return collecionMensageRepetitive; }
+        public Dictionary<int, Mensage> get() { return collecionMensage; }
     }
 }

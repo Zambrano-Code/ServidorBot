@@ -8,38 +8,61 @@ using bot.acciones;
 using bot.funciones;
 using Discord.WebSocket;
 using Discord;
+using ServidorBot.src.View.Clases;
 
 namespace bot.acciones
 {
     public class Mensage
     {
-        public string mensage { get; private set; }
-        public EmbedBuilder embed { get; private set; }
-        public SocketChannel canalEnvio { get; private set; }
         public string name { get; private set; }
+        public string mensage { get; private set; }
+        public List<EmbedBuilder> embeds { get; private set; }
+        public SocketGuild guild_envio { get; private set; }
+        public SocketChannel canal_envio { get; private set; }
+        public SocketUser user_create { get; private set; }
+        public DateTime date_create { get; private set; }
 
-        public Mensage(string name, string mensage, EmbedBuilder embed, SocketChannel canalEnvio)
+        public Mensage()
+        {
+
+        }
+
+        public Mensage(string name, string mensage, List<EmbedBuilder> embeds, SocketChannel canal_envio, SocketGuild guild_envio, SocketUser user_create)
         {
 
             this.name = name;
             this.mensage = mensage;
-            this.embed = embed;
-            this.canalEnvio = canalEnvio;
+            this.embeds = embeds;
+            this.guild_envio = guild_envio;
+            this.canal_envio = canal_envio;
+            this.user_create = user_create;
+            this.date_create = DateTime.Now;
         }
-        
+        public Mensage(string name, string mensage, List<EmbedBuilder> embeds, SocketChannel canal_envio, SocketGuild guild_envio, SocketUser user_create, DateTime date_create)
+        {
+
+            this.name = name;
+            this.mensage = mensage;
+            this.embeds = embeds;
+            this.guild_envio = guild_envio;
+            this.canal_envio = canal_envio;
+            this.user_create = user_create;
+            this.date_create = date_create;
+        }
+
 
         public async void ejecutarMensage()
         {
 
-            IMessageChannel? canalEnvio2 = canalEnvio as IMessageChannel;
+            IMessageChannel? canalEnvio2 = canal_envio as IMessageChannel;
 
-            Embed? embed2 = null;
-            if (embed != null)
+            List<Embed> embed2 = new List<Embed>();
+            foreach (EmbedBuilder embed in embeds)
             {
-                embed2 = embed.Build();
+                embed2.Add(embed.Build());
             }
 
-            await canalEnvio2.SendMessageAsync(mensage, false, embed2);
+            await canalEnvio2.SendMessageAsync(text: mensage, embeds: embed2.ToArray());
 
         }
 

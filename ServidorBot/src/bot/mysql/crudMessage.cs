@@ -18,17 +18,17 @@ namespace bot.mysql
 
         private ConectMysql connect = new ConectMysql();
 
-        private string CREATE_TABLE = "CREATE TABLE botdata.message (id INT NOT NULL AUTO_INCREMENT, name VARCHAR(45) NOT NULL, mensage TEXT(1000) NULL, embed JSON NOT NULL, canal_envio BIGINT NOT NULL, PRIMARY KEY(id));";
+        private string CREATE_TABLE = "CREATE TABLE botdata.message (id INT NOT NULL AUTO_INCREMENT, name VARCHAR(45) NOT NULL, mensage TEXT(1000) NULL, embeds JSON NOT NULL, canal_envio BIGINT NOT NULL, guild_envio BIGINT NOT NULL, user_create BIGINT NOT NULL, date_create DATETIME NOT NULL, PRIMARY KEY(id));";
 
         private string SELECT_TABLE = "SELECT * FROM botdata.message;";
 
-        private string INSERT_ROW = "INSERT INTO botdata.message (name, mensage, embed, canal_envio) VALUES (@name, @mensage, @embed, @canal_envio);";
+        private string INSERT_ROW = "INSERT INTO botdata.message (name, mensage, embeds, canal_envio, guild_envio, user_create, date_create) VALUES (@name, @mensage, @embeds, @canal_envio, @guild_envio, @user_create, @date_create);";
 
         private string IF_EXISTS = "SELECT IF( EXISTS( SELECT * FROM botdata.message WHERE name=@name), 1, 0);";
 
         private string DELETE_ROW = "DELETE FROM botdata.message WHERE (id = @id);";
 
-        private string UPDATE_ROW = "UPDATE botdata.message SET name = @name, mensage = @mensage, embed = @embed, canal_envio = @canal_envio WHERE (id = @id);";
+        private string UPDATE_ROW = "UPDATE botdata.message SET name = @name, mensage = @mensage, embeds = @embeds, canal_envio = @canal_envio, guild_envio = @guild_envio, user_create=@user_create, date_create = @date_create WHERE (id = @id);";
 
         private string ID_FOR_NAME = "SELECT id FROM botdata.message WHERE (id = @id)";
 
@@ -69,24 +69,30 @@ namespace bot.mysql
                     int id;
                     string name;
                     string mensage;
-                    EmbedBuilder embed;
-                    DateTime tiempoEnvio;
-                    TimeSpan timeToRepeat;
-                    string zoneHour;
-                    SocketChannel canalEnvio;
+                    List<EmbedBuilder> embeds;
+                    DateTime tiempo_envio;
+                    TimeSpan time_to_repeat;
+                    string zone_hour;
+                    SocketChannel canal_envio;
+                    SocketGuild guild_envio;
+                    SocketUser user_create;
+                    DateTime date_create;
 
                     while (dr.Read())
                     {
                         id = dr.GetInt16(0);
                         name = dr.GetString(1);
                         mensage = dr.GetString(2);
-                        embed = embedJsonD(dr.GetString(3));
-                        tiempoEnvio = dr.GetDateTime(4);
-                        timeToRepeat = TimeSpan.Parse(dr.GetString(5));
-                        zoneHour = dr.GetString(6);
-                        canalEnvio = Bot.buscarCanal(dr.GetUInt64(7));
+                        embeds = embedJsonD(dr.GetString(3));
+                        tiempo_envio = dr.GetDateTime(4);
+                        time_to_repeat = TimeSpan.Parse(dr.GetString(5));
+                        zone_hour = dr.GetString(6);
+                        canal_envio = Bot.buscarCanal(dr.GetUInt64(7));
+                        guild_envio = Bot.buscarGuild(dr.GetUInt64(8));
+                        user_create = Bot.buscarUser(dr.GetUInt64(9));
+                        date_create = dr.GetDateTime(10);
 
-                        csm.Add(id, new Mensage(name, mensage, embed, canalEnvio));
+                        csm.Add(id, new Mensage(name, mensage, embeds, canal_envio, guild_envio, user_create, date_create));
                     }
 
                 }
@@ -114,8 +120,11 @@ namespace bot.mysql
 
                 cmd.Parameters.Add("@name", MySqlDbType.VarChar).Value = mensage.name;
                 cmd.Parameters.Add("@mensage", MySqlDbType.Text).Value = mensage.mensage;
-                cmd.Parameters.Add("@embed", MySqlDbType.JSON).Value = embedJsonS(mensage.embed);
-                cmd.Parameters.Add("@canal_envio", MySqlDbType.Int64).Value = mensage.canalEnvio.Id;
+                cmd.Parameters.Add("@embeds", MySqlDbType.JSON).Value = embedJsonS(mensage.embeds);
+                cmd.Parameters.Add("@canal_envio", MySqlDbType.Int64).Value = mensage.canal_envio.Id;
+                cmd.Parameters.Add("@guild_envio", MySqlDbType.Int64).Value = mensage.guild_envio.Id;
+                cmd.Parameters.Add("@user_create", MySqlDbType.Int64).Value = mensage.user_create.Id;
+                cmd.Parameters.Add("@date_create", MySqlDbType.DateTime).Value = mensage.date_create.ToString("yyyy:MM:dd HH:mm:ss");
 
                 cmd.ExecuteNonQuery();
 
@@ -190,8 +199,9 @@ namespace bot.mysql
                 cmd.Parameters.Add("@id", MySqlDbType.Int64).Value = id;
                 cmd.Parameters.Add("@name", MySqlDbType.VarChar).Value = mensage.name;
                 cmd.Parameters.Add("@mensage", MySqlDbType.Text).Value = mensage.mensage;
-                cmd.Parameters.Add("@embed", MySqlDbType.JSON).Value = embedJsonS(mensage.embed);
-                cmd.Parameters.Add("@canal_envio", MySqlDbType.Int64).Value = mensage.canalEnvio.Id;
+                cmd.Parameters.Add("@embeds", MySqlDbType.JSON).Value = embedJsonS(mensage.embeds);
+                cmd.Parameters.Add("@canal_envio", MySqlDbType.Int64).Value = mensage.canal_envio.Id;
+                cmd.Parameters.Add("@date_create", MySqlDbType.DateTime).Value = mensage.date_create;
 
 
                 int a = cmd.ExecuteNonQuery();
@@ -239,13 +249,13 @@ namespace bot.mysql
             }
         }
 
-        private string embedJsonS(EmbedBuilder embed)
+        private string embedJsonS(List<EmbedBuilder> embed)
         {
             return JsonConvert.SerializeObject(embed);
         }
-        private EmbedBuilder embedJsonD(string embed)
+        private List<EmbedBuilder> embedJsonD(string embed)
         {
-            return JsonConvert.DeserializeObject<EmbedBuilder>(embed);
+            return JsonConvert.DeserializeObject<List<EmbedBuilder>>(embed);
         }
 
     }

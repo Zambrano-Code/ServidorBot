@@ -40,6 +40,7 @@ namespace bot.acciones
             await Relog(temp, timeToRepeat);
         }
 
+
         public void Stop()
         {
             if(timer != null)
@@ -56,7 +57,7 @@ namespace bot.acciones
             
 
             DateTime timeTemp;
-            if (zonehour == "utc")
+            if (zonehour.ToLower() == "utc")
             {
                 timeTemp = DateTime.UtcNow;
             }

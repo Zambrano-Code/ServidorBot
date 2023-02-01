@@ -104,7 +104,13 @@ namespace bot
         private void CargarEventos()
         {
             _eventoMenRep = new CargaDeEvento();
-            
+
+            var dt = new DateTime(2023, 01, 02, 12, 05, 00);
+            var ch = _cliente.GetChannel(1013262734411972718);
+            var gh = _cliente.GetGuild(996937109740978226);
+            var uh = _cliente.GetUser(472582540134449152);
+            _eventoMenRep.agregarMRepetitivo(new MensageRepetitive("Despedida", "Chao, Geovanny", new List<EmbedBuilder>(), dt, TimeSpan.FromSeconds(15), "utc", ch, gh, uh));
+
             _eventoMenRep.activarEventos();
         }
 
@@ -155,6 +161,14 @@ namespace bot
         public static SocketChannel buscarCanal(ulong id)
         {
             return _cliente.GetChannel(id);
+        }
+        public static SocketGuild buscarGuild(ulong id)
+        {
+            return _cliente.GetGuild(id);
+        }
+        public static SocketUser buscarUser(ulong id)
+        {
+            return _cliente.GetUser(id);
         }
 
         /// <summary>

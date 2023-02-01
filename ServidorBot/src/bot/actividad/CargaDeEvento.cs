@@ -1,4 +1,4 @@
-﻿    using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -26,7 +26,7 @@ namespace bot.actividad
 
         public CargaDeEvento()
         {
-            
+
             cargarTabla();
             activarEventos();
 
@@ -47,7 +47,7 @@ namespace bot.actividad
             {
                 return 0;
             }
-            else if(vrf_row == 0)
+            else if (vrf_row == 0)
             {
 
                 bool vr = dbEvents.insertRow(mensageR);
@@ -61,7 +61,8 @@ namespace bot.actividad
                 else { return -1; }
 
 
-            }else
+            }
+            else
             {
                 return -2;
             }
@@ -73,7 +74,7 @@ namespace bot.actividad
         {
 
             bool vr = dbEvents.deleteRow(id);
-            if(vr)
+            if (vr)
             {
                 var tempEvent = collecionMensageRepetitive[id];
                 tempEvent.Stop();
@@ -107,16 +108,20 @@ namespace bot.actividad
             collecionMensageRepetitive = dbEvents.getTable();
             if (collecionMensageRepetitive == null)
             {
-                if (dbEvents.createTable()) Console.WriteLine($"Se acaba de crear la tabla 'events' con exito.");
+                if (dbEvents.createTable())
+                {
+                    Console.WriteLine($"Se acaba de crear la tabla 'events' con exito.");
+                    cargarTabla();
+                }
                 else throw new Exception("No se pudo obtener datos de la tabla, ni crear la tabla. (CargaDeEvento.cs - cargarTabla())");
             }
-            
+
         }
 
         public void activarEventos()
         {
             if (collecionMensageRepetitive == null) return;
-            foreach(var element in collecionMensageRepetitive)
+            foreach (var element in collecionMensageRepetitive)
             {
                 element.Value.Star();
             }
@@ -130,6 +135,18 @@ namespace bot.actividad
             }
         }
 
+        public List<MensageRepetitive> getEventGuild(SocketGuild guild)
+        {
+            List<MensageRepetitive> temp = new List<MensageRepetitive>();
+            foreach (var element in collecionMensageRepetitive)
+            {
+                if (guild == element.Value.guild_envio)
+                {
+                    temp.Add(element.Value);
+                }
+            }
+            return temp;
+        }
         public Dictionary<int, MensageRepetitive> get() { return collecionMensageRepetitive; }
     }
 }
