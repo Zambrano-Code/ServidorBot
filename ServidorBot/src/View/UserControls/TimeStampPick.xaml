@@ -1,4 +1,6 @@
-﻿<UserControl x:Class="ServidorBot.src.View.UserControls.TimeStampPick"
+﻿<UserControl 
+             x:Name="timeStamp"
+             x:Class="ServidorBot.src.View.UserControls.TimeStampPick"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -9,7 +11,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="50" d:DesignWidth="150">
 
-    <Grid>
+    <Grid DataContext="{Binding ElementName=timeStamp}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
@@ -18,6 +20,6 @@
             <RowDefinition />
         </Grid.RowDefinitions>
         <TextBlock Text="{Binding Text}" Foreground="{DynamicResource Windows.TextFondo1}" Grid.ColumnSpan="2" FontWeight="Bold" Margin="10,0,0,0"/>
-        <local:DataTimePicker DataContext="{Binding DateTime}" Grid.Row="1"/>
+        <local:DataTimePicker DateTime="{Binding DateTime}" Grid.Row="1"/>
     </Grid>
 </UserControl>

@@ -1,0 +1,120 @@
+﻿<Window x:Name="mainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ServidorBot.src.View.View"
+        xmlns:UC="clr-namespace:ServidorBot.src.View.UserControls" x:Class="ServidorBot.src.View.View.MainWindow"
+        xmlns:res="clr-namespace:ServidorBot.Resources"
+        xmlns:viewModel="clr-namespace:ServidorBot.src.View.ViewModel"
+        xmlns:conver="clr-namespace:ServidorBot.src.View.Converter"
+        xmlns:userControl="clr-namespace:ServidorBot.src.View.UserControls"
+        
+        mc:Ignorable="d"
+        Height="710" Width="1200" Background="Transparent" WindowStyle="None" AllowsTransparency="True"
+        WindowStartupLocation="CenterScreen"
+    >
+    <Window.Resources>
+        <viewModel:MainWindowVM x:Key="viewModel"/>
+        <conver:UrlToImageBrushConverter x:Key="UrlToImageBrushConverter"/>
+    </Window.Resources>
+    <Border Margin="5" >
+        <Border.Effect>
+            <DropShadowEffect BlurRadius="8" RenderingBias="Quality" Color="#f00" ShadowDepth="0" Direction="0" />
+        </Border.Effect>
+        <Grid Height="700"  DataContext="{Binding Source={StaticResource viewModel}}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="80"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition MaxHeight="25"/>
+                <RowDefinition/>
+
+            </Grid.RowDefinitions>
+
+            <UC:BarraPrincipal Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Title="{x:Static res:Recursos.MAIN_WINDOW_TITLE}" Window="{Binding ElementName=mainWindow}"/>
+
+            <Border Grid.Row="2" Grid.Column="0" CornerRadius="0,0,0,10" Background="{DynamicResource Windows.BG.Principal}">
+                <StackPanel x:Name="Grid_Cole"  Orientation="Vertical">
+   
+                    <userControl:IconServerDinamic Height="55" Margin="0,10,0,15" Command="{Binding UpdateVMCommand}" CommandParameter="Mensajes" Select="True"> 
+                        <userControl:IconServerDinamic.Style>
+                            <Style TargetType="userControl:IconServerDinamic">
+                                <Setter Property="BackgroundIcon" Value="#36393F"/>
+                                <Setter Property="BackgroundLine" Value="White"/>
+                                <Setter Property="VisiblePath" Value="True"/>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Trigger.EnterActions>
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <ColorAnimation Storyboard.TargetProperty="(BackgroundIcon).(SolidColorBrush.Color)" To="#5865F2" Duration="0:0:0.2" />
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </Trigger.EnterActions>
+                                        <Trigger.ExitActions>
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <ColorAnimation Storyboard.TargetProperty="(BackgroundIcon).(SolidColorBrush.Color)" To="#36393F" Duration="0:0:0.2" />
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </Trigger.ExitActions>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </userControl:IconServerDinamic.Style>
+                    </userControl:IconServerDinamic>
+                    <Path Data="M9.75,77.75 L59.25,77.5" Fill="#36393F" HorizontalAlignment="Center" Height="2" Stroke="#36393F" Stretch="Fill" StrokeStartLineCap="Round" StrokeEndLineCap="Round" Width="50" StrokeThickness="2"/>
+                    <ItemsControl ItemsSource="{Binding Model.ListServer}" Margin="0,10,0,0" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Background="Transparent" BorderThickness="0" Height="600" d:ItemsSource="{d:SampleData ItemCount=5}" >
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <userControl:IconServerDinamic BackgroundLine="White" Margin="0,5" Command="{Binding DataContext.UpdateVMCommand, RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}" CommandParameter="{Binding}">
+                                    <userControl:IconServerDinamic.Style>
+                                        <Style TargetType="userControl:IconServerDinamic">
+                                            <Setter Property="BackgroundIcon" Value="{Binding IconUrl, Converter={StaticResource UrlToImageBrushConverter}}"/>
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding IconUrl}" Value="{x:Null}">
+                                                    <Setter Property="BackgroundIcon" Value="#36393F" />
+                                                    <Setter Property="Text" Value="{Binding Name}" />
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding IconUrl}" Value="">
+                                                    <Setter Property="BackgroundIcon" Value="#36393F" />
+                                                    <Setter Property="Text" Value="{Binding Name}" />
+                                                </DataTrigger>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Trigger.EnterActions>
+                                                        <BeginStoryboard>
+                                                            <Storyboard>
+                                                                <ColorAnimation Storyboard.TargetProperty="(BackgroundIcon).(SolidColorBrush.Color)" To="#5865F2" Duration="0:0:0.2" />
+                                                            </Storyboard>
+                                                        </BeginStoryboard>
+                                                    </Trigger.EnterActions>
+                                                    <Trigger.ExitActions>
+                                                        <BeginStoryboard>
+                                                            <Storyboard>
+                                                                <ColorAnimation Storyboard.TargetProperty="(BackgroundIcon).(SolidColorBrush.Color)" To="#36393F" Duration="0:0:0.2" />
+                                                            </Storyboard>
+                                                        </BeginStoryboard>
+                                                    </Trigger.ExitActions>
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </userControl:IconServerDinamic.Style>
+                                </userControl:IconServerDinamic>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
+            </Border>
+
+            <Border Grid.Row="2" Grid.Column="2" CornerRadius="0,0,10,0" Background="{DynamicResource Windows.BG.Principal}">
+                <Border CornerRadius="25,0,10,0" Background="{DynamicResource Windows.BG.Tercero}">
+                    <ContentControl Content="{Binding SelectedVM}"/>
+                </Border>
+            </Border>
+
+
+        </Grid>
+    </Border>
+</Window>

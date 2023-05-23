@@ -5,25 +5,106 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:ServidorBot.src.View.UserControls"
+             xmlns:conver="clr-namespace:ServidorBot.src.View.Converter"
              mc:Ignorable="d" 
              d:DesignHeight="50" d:DesignWidth="800">
 
+    <UserControl.Resources>
+        <conver:BoolToVisibilityConverter x:Key="boolToVisibilityConverter"/>
+
+        <Style x:Key="buttonClose" TargetType="{x:Type Button}">
+            <Setter Property="Background" Value="{DynamicResource Button.BG.Tranparent}"/>
+            <Setter Property="BorderBrush" Value="{x:Null}"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Width" Value="40"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border" CornerRadius="0,10,0,0" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true">
+                            <Path Data="M13 1 1 13M1 1l12 12" Fill="White" Margin="0,0,0,0" Height="10" Stroke="White" Stretch="Fill" 
+                              Width="10" StrokeStartLineCap="Round" StrokeEndLineCap="Round" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="{DynamicResource ButtonClose.BG.MouseOver}"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="{DynamicResource ButtonClose.BG.Click}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="buttonMax" TargetType="{x:Type Button}">
+            <Setter Property="Background" Value="{DynamicResource Button.BG.Tranparent}"/>
+            <Setter Property="BorderBrush" Value="{x:Null}"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Width" Value="30"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true">
+                            <Rectangle Height="10" Stroke="White" Width="10" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,0" RadiusY="2.5" RadiusX="2.5"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="{DynamicResource Buttton.BG.MinMax.MouseOver}"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="{DynamicResource Buttton.BG.MinMax.Click}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="buttonMin" TargetType="{x:Type Button}">
+            <Setter Property="Background" Value="{DynamicResource Button.BG.Tranparent}"/>
+            <Setter Property="BorderBrush" Value="{x:Null}"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Width" Value="30"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true">
+                            <Rectangle Height="2" Stroke="White" Width="10" HorizontalAlignment="Left" Margin="10,5,0,0" VerticalAlignment="Center" RadiusX="1" RadiusY="1"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="{DynamicResource Buttton.BG.MinMax.MouseOver}"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="{DynamicResource Buttton.BG.MinMax.Click}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
+    </UserControl.Resources>
+
     <Border MouseDown="window_Movible" CornerRadius="10,10,0,0" Background="#FF292B2F">
-        <Grid>
+        <Grid DataContext="{Binding ElementName=barra}">
 
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
-                <!--<ColumnDefinition Width="30"/>
-                    <ColumnDefinition Width="30"/>
-                    <ColumnDefinition Width="40"/>-->
             </Grid.ColumnDefinitions>
 
             <DockPanel>
-                <Button x:Name="Close" Click="Close_Click" DockPanel.Dock="Right" Style="{DynamicResource buttonClose}"  Content="" Grid.Row="0" Width="40" HorizontalAlignment="Right"/>
-                <Button x:Name="Max" Click="Max_Click" Visibility="{Binding Maximize}" DockPanel.Dock="Right" Style="{DynamicResource buttonMax}"  Content="" Grid.Row="0" Width="30" HorizontalAlignment="Right"/>
-                <Button x:Name="Min" Click="Min_Click" Visibility="{Binding Minimize}" DockPanel.Dock="Right" Style="{DynamicResource buttonMin}" Content="" Grid.Row="0" Width="30" HorizontalAlignment="Right"/>
-                
+                <Button Click="Close_Click" DockPanel.Dock="Right" Style="{DynamicResource buttonClose}"  Content="" Grid.Row="0" Width="40" HorizontalAlignment="Right"/>
+                <Button Click="Max_Click" Visibility="{Binding Maximize, Converter={StaticResource boolToVisibilityConverter}}" DockPanel.Dock="Right" Style="{DynamicResource buttonMax}"  Content="" Grid.Row="0" Width="30" HorizontalAlignment="Right"/>
+                <Button Click="Min_Click" Visibility="{Binding Minimize, Converter={StaticResource boolToVisibilityConverter}}" DockPanel.Dock="Right" Style="{DynamicResource buttonMin}" Content="" Grid.Row="0" Width="30" HorizontalAlignment="Right"/>
+
             </DockPanel>
 
             <TextBlock HorizontalAlignment="Left" Height="16" Margin="6,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="80" Foreground="{DynamicResource Windows.Text}" Text="{Binding Title}"/>

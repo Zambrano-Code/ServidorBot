@@ -1,0 +1,67 @@
+﻿<UserControl x:Name="selectZoneHour"
+             x:Class="ServidorBot.src.View.UserControls.SelectZoneHour"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ServidorBot.src.View.UserControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="50" d:DesignWidth="50">
+
+    <Grid DataContext="{Binding ElementName=selectZoneHour}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <TextBlock Text="{Binding Text}" HorizontalAlignment="Right" Foreground="{DynamicResource Windows.TextFondo1}"  FontWeight="Bold"/>
+        <Border Grid.Row="1" CornerRadius="10" PreviewMouseDown="Border_PreviewMouseDown" Height="20" Width="40"  VerticalAlignment="Top" HorizontalAlignment="{Binding HorizontalAlignment}">
+
+            <Border x:Name="Circle" Grid.Row="1" CornerRadius="9" Margin="4,2" Background="#fff" Width="16" Height="16" HorizontalAlignment="Left" >
+                <Border.Style>
+                    <Style  TargetType="{x:Type Border}">
+                        <Setter Property="RenderTransform">
+                            <Setter.Value>
+                                <TranslateTransform X="0" />
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Select}" Value="true">
+                                <Setter Property="RenderTransform">
+                                    <Setter.Value>
+                                        <TranslateTransform X="16" />
+                                    </Setter.Value>
+                                </Setter>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Border.Style>
+            </Border>
+            <Border.Style>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="Background" Value="#02B5E7"/>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Select}" Value="false">
+                            <DataTrigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ColorAnimation Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
+                                                To="#6C7A86" Duration="0:0:0.2"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </DataTrigger.EnterActions>
+                            <DataTrigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ColorAnimation Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
+                                                To="#02B5E7" Duration="0:0:0.150"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </DataTrigger.ExitActions>
+
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Border.Style>
+        </Border>
+    </Grid>
+</UserControl>

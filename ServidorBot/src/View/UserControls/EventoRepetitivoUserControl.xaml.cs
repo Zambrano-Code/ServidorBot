@@ -1,5 +1,4 @@
 ﻿using bot.acciones;
-using ServidorBot.src.View.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,7 +21,7 @@ namespace ServidorBot.src.View.UserControls
     /// </summary>
     public partial class EventoRepetitivoUserControl : UserControl
     {
-        public ModeloEventoRepetitivoUserControl ModelEMR { get; set; }
+        //public ModeloEventoRepetitivoUserControl ModelEMR { get; set; }
 
         public EventoRepetitivoUserControl()
         {

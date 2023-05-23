@@ -1,0 +1,109 @@
+﻿<Window
+        x:Name="crearEmbed"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:UserC="clr-namespace:ServidorBot.src.View.UserControls"  
+        x:Class="ServidorBot.src.View.View.CrearEmbed"
+        xmlns:viewModel="clr-namespace:ServidorBot.src.View.ViewModel"
+        xmlns:res="clr-namespace:ServidorBot.Resources" 
+        WindowStyle="None"
+        Background="Transparent"
+        Width="600" Height="700"
+        WindowStartupLocation="CenterScreen"
+        AllowsTransparency="True"
+        >
+
+
+    <Border Background="{StaticResource Windows.BG.Principal}" CornerRadius="10" Margin="10">
+
+        <Border.Effect>
+            <DropShadowEffect BlurRadius="8" RenderingBias="Quality" Color="White" ShadowDepth="0" Direction="0" />
+        </Border.Effect>
+
+        <Grid >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition MaxHeight="25"/>
+                <RowDefinition/>
+                <RowDefinition Height="50"/>
+
+            </Grid.RowDefinitions>
+
+            <UserC:BarraPrincipal Grid.Column="0" Grid.Row="0" Title="{x:Static res:Recursos.CREATE_EMBED_TITLE_WINDOWS}" Window="{Binding ElementName=crearEmbed}" Maximize="False" Minimize="False"/>
+
+            <ScrollViewer Grid.Row="1" Margin="5,0,5,10">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0" Margin="10,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="55"/>
+                            <RowDefinition Height="55"/>
+                        </Grid.RowDefinitions>
+
+                        <UserC:TextBoxLimText Text="{Binding AuthorName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  NameElment="{x:Static res:Recursos.CREATE_EMBED_AUTHOR_NAME}" LengthText="256" Grid.Row="0" Height="50" Grid.Column="0" Grid.ColumnSpan="2"/>
+                        <UserC:TextBoxLimText Text="{Binding AuthorURL,  Mode=TwoWay}" NameElment="{x:Static res:Recursos.CREATE_EMBED_AUTHOR_URL}" VisibleCount="Collapsed" Grid.Row="1" Height="50" Grid.Column="0"/>
+                        <UserC:TextBoxLimText Text="{Binding AuthorURLIcon, Mode=TwoWay}" NameElment="{x:Static res:Recursos.CREATE_EMBED_AUTHOR_URL_ICON}" VisibleCount="Collapsed" Grid.Row="1" Height="50" Grid.Column="1"/>
+                    </Grid>
+
+                    <Grid Grid.Row="1" Margin="10,5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="55"/>
+                            <RowDefinition MinHeight="80"/>
+                        </Grid.RowDefinitions>
+
+                        <UserC:TextBoxLimText Text="{Binding Title, Mode=TwoWay}" NameElment="{x:Static res:Recursos.CREATE_EMBED_TITLE}" LengthText="256" Grid.Row="0" Height="50" />
+                        <UserC:TextBoxLimText Text="{Binding Description, Mode=TwoWay}" NameElment="{x:Static res:Recursos.CREATE_EMBED_DESCRIPTION}" LengthText="2048" Return="True" MaxHeight="250" Grid.Row="1"/>
+                    </Grid>
+
+                    <Grid Grid.Row="3" Margin="10,5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="55"/>
+                            <RowDefinition MinHeight="55"/>
+                            <RowDefinition MinHeight="55"/>
+                            <RowDefinition MinHeight="55"/>
+                            <RowDefinition MinHeight="55"/>
+                        </Grid.RowDefinitions>
+
+                        <UserC:TextBoxLimText Text="{Binding URLTitle, Mode=TwoWay}" NameElment="{x:Static res:Recursos.CREATE_EMBED_TITLE_URL}" VisibleCount="Collapsed" Grid.Row="0" Grid.Column="0" Height="50" />
+                        <UserC:SelectColorTextBlock  Text="{x:Static res:Recursos.CREATE_EMBED_COLOR}" Color="{Binding Color, Mode=TwoWay}" Height="50" Margin="10,0,0,0" Grid.Row="0" Grid.Column="1"/>
+
+                        <UserC:TextBoxLimText Text="{Binding ImageURL, Mode=TwoWay}" NameElment="{x:Static res:Recursos.CREATE_EMBED_IMAGE_URL}" VisibleCount="Collapsed" Grid.Row="1" Height="50" />
+                        <UserC:TextBoxLimText Text="{Binding ThumbnailURL, Mode=TwoWay}" NameElment="{x:Static res:Recursos.CREATE_EMBED_THUMBNAIL_URL}" VisibleCount="Collapsed" Grid.Row="1" Grid.Column="1" Height="50" />
+                        <UserC:TextBoxLimText Text="{Binding FooterText, Mode=TwoWay}" NameElment="{x:Static res:Recursos.CREATE_EMBED_FOOTER_TEXT}" LengthText="256" Grid.Row="2" Grid.ColumnSpan="2" Height="50" />
+                        <UserC:TextBoxLimText Text="{Binding FooterTextURL, Mode=TwoWay}" NameElment="{x:Static res:Recursos.CREATE_EMBED_FOOTER_TEXT_URL}" VisibleCount="Collapsed" Grid.Row="3" Grid.Column="1" Height="50" />
+                        <UserC:TimeStampPick  DateTime="{Binding TimeStamp, Mode=TwoWay}" Text="{x:Static res:Recursos.CREATE_EMBED_TIMESTAMP}" Grid.Row="3" Grid.Column="0"/>
+                        <UserC:AddFields Fields="{Binding Fields, Mode=TwoWay}" TextAdd="{x:Static res:Recursos.CREATE_EMBED_FIELD_ADD}" TextRemove="{x:Static res:Recursos.CREATE_EMBED_FIELD_REMOVE}" TextName="{x:Static res:Recursos.CREATE_EMBED_FIELD_NAME}" TextValue="{x:Static res:Recursos.CREATE_EMBED_FIELD_VALUE}" TextChecked="{x:Static res:Recursos.CREATE_EMBED_FIELD_INLINE}" Grid.Row="4" Grid.ColumnSpan="2"/>
+
+
+                    </Grid>
+                </Grid>
+
+            </ScrollViewer>
+            <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Center" Margin="0,0,0,10">
+                <Button Style="{DynamicResource ButtonCreateEmbedCancel}" HorizontalAlignment="Center" Width="100" Margin="25,0,50,0" Content="Cancel" Command="{Binding CancelEmbed}"/>
+                <Button Style="{DynamicResource ButtonCreateEmbedCancel}" HorizontalAlignment="Center" Width="100" Margin="50,0,25,0" Content="Listo" Command="{Binding SubmitEmbed}"/>
+            </StackPanel>
+        </Grid>
+
+    </Border>
+</Window>

@@ -3,6 +3,7 @@ using bot.mysql;
 using Discord;
 using MySql.Data.MySqlClient;
 using Newtonsoft.Json;
+using ServidorBot;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -66,7 +67,7 @@ namespace bot.mysql
                     {
                         id = dr.GetUInt64(0);
 
-                        canalDM = Bot.buscarDMUser(id);
+                        canalDM = App.Bot.buscarDMUser(id);
 
                         csm.Add(canalDM);
                     }

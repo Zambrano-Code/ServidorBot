@@ -270,7 +270,7 @@
                                 <Path x:Name="exit" Visibility="Hidden" Data="M13 1 1 13M1 1l12 12" Height="10" Stroke="{DynamicResource CheckBox.btnClose.Icon.Default}" Stretch="Fill" Width="10" StrokeStartLineCap="Round" StrokeEndLineCap="Round" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
                             </Border>
-
+                           
 
                         </Grid>
                     </Border>

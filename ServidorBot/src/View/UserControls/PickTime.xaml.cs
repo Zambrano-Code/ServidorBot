@@ -13,11 +13,6 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using static ServidorBot.src.Datos.Labels;
-using static ServidorBot.src.View.Windows.createEmbed;
 
 namespace ServidorBot.src.View.UserControls
 {

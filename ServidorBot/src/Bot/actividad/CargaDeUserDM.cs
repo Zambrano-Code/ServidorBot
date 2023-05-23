@@ -15,7 +15,7 @@ using bot.mysql;
 using bot.Exceptions;
 using MySqlX.XDevAPI;
 using System.Reactive.Linq;
-using ServidorBot.src.View.Pages;
+using ServidorBot.src.View.View;
 using System.Collections.ObjectModel;
 
 namespace bot.actividad

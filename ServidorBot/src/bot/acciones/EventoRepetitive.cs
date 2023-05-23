@@ -1,8 +1,4 @@
-﻿using Discord;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -11,11 +7,11 @@ namespace bot.acciones
 {
     public class EventoRepetitive
     {
+        public string name { get; private set; }
         public DateTime starTime { get; private set; }
         public TimeSpan timeToRepeat { get; private set; }
         public string zonehour { get; private set; }
         public Action evento { get; private set; }
-        public string name { get; private set; }
 
         private TimeSpan temp { get; set; }
         private PeriodicTimer? timer { get; set; }

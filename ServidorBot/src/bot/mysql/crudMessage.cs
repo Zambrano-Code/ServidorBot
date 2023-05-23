@@ -5,6 +5,7 @@ using Discord;
 using Discord.WebSocket;
 using MySql.Data.MySqlClient;
 using Newtonsoft.Json;
+using ServidorBot;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -87,9 +88,9 @@ namespace bot.mysql
                         tiempo_envio = dr.GetDateTime(4);
                         time_to_repeat = TimeSpan.Parse(dr.GetString(5));
                         zone_hour = dr.GetString(6);
-                        canal_envio = Bot.buscarCanal(dr.GetUInt64(7));
-                        guild_envio = Bot.buscarGuild(dr.GetUInt64(8));
-                        user_create = Bot.buscarUser(dr.GetUInt64(9));
+                        canal_envio = App.Bot.buscarCanal(dr.GetUInt64(7));
+                        guild_envio = App.Bot.buscarGuild(dr.GetUInt64(8));
+                        user_create = App.Bot.buscarUser(dr.GetUInt64(9));
                         date_create = dr.GetDateTime(10);
 
                         csm.Add(id, new Mensage(name, mensage, embeds, canal_envio, guild_envio, user_create, date_create));

@@ -11,6 +11,7 @@ namespace ServidorBot.src.Datos
         #region Ventanas
         public const string NickWindowsMain = "Secretaria Bot";
         public const string NickWindowsCreateEmbed = "Create Embed";
+        public const string NickWindowsCreateEvento = "Create Evento";
         #endregion
 
         #region Pages
@@ -19,7 +20,6 @@ namespace ServidorBot.src.Datos
         #endregion
 
         #region Create Embed
-        #endregion
         public class ViewCreateEmbed
         {
             public const string AuthorName = "Nombre: ";
@@ -44,8 +44,19 @@ namespace ServidorBot.src.Datos
             public const string FieldInline = "Inline: ";
 
             public const string MensajeEmbedError = "Debes de completar alemenos: \n-Author\n-Titulo\n-Descripcion\n-Footer\n-o agregar un Field.";
-            public const string MensajeFieldError = "Deves de llenar los field tanto el nombre como el varlo.";
+            public const string MensajeFieldError = "Deves de llenar los field tanto el nombre como el valor.";
         }
+        #endregion
+
+        #region Create Evento
+        public class CreateEvento
+        {
+            public const string Nombre = "Nombre: ";
+            public const string TimeInit = "Hora de inicio: ";
+            public const string TImeRepeat = "Tiempo a repetir: ";
+            public const string ZoneHour = "Zona Horaria: ";
+        }
+        #endregion
     }
 
 }

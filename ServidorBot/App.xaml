@@ -1,21 +1,28 @@
 ﻿<Application x:Class="ServidorBot.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:ServidorBot"
-             StartupUri="src/View/Windows/VentanaPrincipal.xaml">
+             xmlns:local="clr-namespace:ServidorBot" xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             >
     <Application.Resources>
-
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="src/View/Dictionarys/TablaDeColores.xaml"/>
                 <ResourceDictionary Source="src/View/Dictionarys/disenElement.xaml"/>
                 <ResourceDictionary Source="src/View/Dictionarys/disenButtons.xaml"/>
                 <ResourceDictionary Source="src/View/Dictionarys/scrollBarStyle.xaml"/>
-                <ResourceDictionary Source="src/View/Dictionarys/TablaDeColores.xaml"/>
                 <ResourceDictionary Source="src/View/Dictionarys/disenTextBox.xaml"/>
                 <ResourceDictionary Source="src/View/Dictionarys/disenSeccionDiscord.xaml"/>
-
+                <ResourceDictionary Source="src/View/Dictionarys/disenSeccionDiscord.xaml"/>
+                <ResourceDictionary Source="src/View/Dictionarys/PickTime/PickTimeST.xaml"/>
+                
+                <ResourceDictionary Source="src/View/Dictionarys/DataTemplate.xaml"/>
+                
             </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
+            
 
+        </ResourceDictionary>
+                
     </Application.Resources>
+    
+    
 </Application>
