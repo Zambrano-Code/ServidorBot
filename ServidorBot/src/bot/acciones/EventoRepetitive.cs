@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reactive.Concurrency;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -12,10 +13,11 @@ namespace bot.acciones
         public TimeSpan timeToRepeat { get; private set; }
         public string zonehour { get; private set; }
         public Action evento { get; private set; }
+        public DateTime ScheduledTime { get; private set; }
 
         private TimeSpan temp { get; set; }
-        private PeriodicTimer? timer { get; set; }
 
+        private Timer? timer { get; set; }
         
 
         public EventoRepetitive(string name, DateTime starTime, TimeSpan timeToRepeat, string zonehour , Action evento)
@@ -33,7 +35,7 @@ namespace bot.acciones
         {
             validar();
             Console.WriteLine("Este evento se enviara en: " + temp.ToString());
-            await Relog(temp, timeToRepeat);
+            StartRelog(temp, timeToRepeat);
         }
 
 
@@ -80,28 +82,25 @@ namespace bot.acciones
         }
 
 
+        
+
         /// <summary>
         /// Este metodo al ejecuta un evento a la hora fijada, repitira la accion evento() cada cierto tiempo (time2), si es que le agrego un valor
         /// </summary>
         /// <param name="time1">Tiempo que se va a ejcutar la accion</param>
         /// <param name="time2">Tiempo a repetir la accion</param>
         /// <returns></returns>
-        private async Task Relog(TimeSpan time1, TimeSpan time2)
+        private void StartRelog(TimeSpan time1, TimeSpan time2)
         {
-            timer = new PeriodicTimer(time1);
+            var timeR = time2 == TimeSpan.Zero ? Timeout.InfiniteTimeSpan : time2;
+            ScheduledTime = DateTime.Now.Add(time1);
 
-            while( await timer.WaitForNextTickAsync())
+            timer = new Timer( _ =>
             {
                 evento();
-                if (time2 > TimeSpan.Zero)
-                {
-                    await Relog(time2, TimeSpan.Zero);
-                }
-                
-               
-            }
+                ScheduledTime = DateTime.Now.Add(time2);
+            }, null, time1, timeR);
         }
-
 
 
     }

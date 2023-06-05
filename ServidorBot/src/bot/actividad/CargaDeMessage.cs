@@ -18,7 +18,7 @@ namespace bot.actividad
 {
     public class CargaDeMessage
     {
-        private Dictionary<int, Mensage> collecionMensage;
+        private Dictionary<int, MensageBase> collecionMensage;
 
         private configJson config = new configJson();
 
@@ -30,22 +30,22 @@ namespace bot.actividad
             cargarTabla();
 
         }
-        public bool agregarMensage(Mensage mensage)
+        public bool agregarMensage(MensageBase mensage)
         {
          
-            if (dbMessage.verificInTable(mensage.name) == 1)
+            if (dbMessage.verificInTable(mensage.Name) == 1)
             {
                 Console.WriteLine("Ya existe mensage con este nombre. Usa otro.");
                 return false;
             }
-            else if(dbMessage.verificInTable(mensage.name) == 0)
+            else if(dbMessage.verificInTable(mensage.Name) == 0)
             {
 
                 bool vr = dbMessage.insertRow(mensage);
                 if (vr)
                 {
-                    int id = dbMessage.obtenerIdForName(mensage.name);
-                    collecionMensage.Add(id, new Mensage(mensage.name, mensage.mensage, mensage.embeds, mensage.canal_envio, mensage.guild_envio, mensage.user_create));
+                    int id = dbMessage.obtenerIdForName(mensage.Name);
+                    collecionMensage.Add(id, new MensageBase(mensage.Name, mensage.Mensage, mensage.Embeds, mensage.Channel, mensage.Guild, mensage.CreateFor));
                     return true;
 
                 }
@@ -60,13 +60,13 @@ namespace bot.actividad
 
         }
 
-        public bool updateMensage(int id, Mensage mensage)
+        public bool updateMensage(int id, MensageBase mensage)
         {
             bool vr = dbMessage.updateRow(id, mensage);
 
             if (vr)
             {
-                collecionMensage[id] = new Mensage(mensage.name, mensage.mensage, mensage.embeds, mensage.canal_envio, mensage.guild_envio, mensage.user_create);
+                collecionMensage[id] = new MensageBase(mensage.Name, mensage.Mensage, mensage.Embeds, mensage.Channel, mensage.Guild, mensage.CreateFor);
 
                 return true;
             }
@@ -99,6 +99,6 @@ namespace bot.actividad
             collecionMensage[id].ejecutarMensage();
         }
 
-        public Dictionary<int, Mensage> get() { return collecionMensage; }
+        public Dictionary<int, MensageBase> get() { return collecionMensage; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Discord.WebSocket;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,9 +9,7 @@ namespace ServidorBot.src.View.Model
 {
     public class SeccionDiscordEventosM
     {
-        public SeccionDiscordEventosM()
-        {
-            
-        }
+        public SocketGuild Guild { get; set; }
+        
     }
 }

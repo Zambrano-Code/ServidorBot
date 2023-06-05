@@ -69,7 +69,7 @@
                     <ItemsControl ItemsSource="{Binding Model.ListServer}" Margin="0,10,0,0" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Background="Transparent" BorderThickness="0" Height="600" d:ItemsSource="{d:SampleData ItemCount=5}" >
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <userControl:IconServerDinamic BackgroundLine="White" Margin="0,5" Command="{Binding DataContext.UpdateVMCommand, RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}" CommandParameter="{Binding}">
+                                <userControl:IconServerDinamic BackgroundLine="White" Margin="0,5" Command="{Binding DataContext.UpdateVMCommand, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" CommandParameter="{Binding}">
                                     <userControl:IconServerDinamic.Style>
                                         <Style TargetType="userControl:IconServerDinamic">
                                             <Setter Property="BackgroundIcon" Value="{Binding IconUrl, Converter={StaticResource UrlToImageBrushConverter}}"/>

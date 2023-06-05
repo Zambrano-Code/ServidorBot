@@ -1,12 +1,14 @@
-﻿<UserControl x:Class="ServidorBot.src.View.UserControls.EventoRepetitivoUserControl"
+﻿<UserControl x:Name="eventRepeat"
+             x:Class="ServidorBot.src.View.UserControls.EventoRepetitivoUserControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:ServidorBot.src.View.UserControls"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:ServidorBot.src.View.UserControls" 
              mc:Ignorable="d" 
-             Height="auto" Width="300" VerticalAlignment="Center" Margin="20">
-    <Border Background="{DynamicResource Windows.BG.Tercero}" CornerRadius="15">
+             Height="auto" Width="300" VerticalAlignment="Center" Margin="20"
+             >
+    <Border Background="{DynamicResource Windows.BG.Tercero}" CornerRadius="15" DataContext="{Binding ElementName=eventRepeat, Path=Model}">
         <Border.Effect>
             <DropShadowEffect BlurRadius="20" RenderingBias="Quality" Color="#000" ShadowDepth="0" Direction="0" />
         </Border.Effect>
@@ -30,18 +32,12 @@
                 </WrapPanel.Resources>
                 <StackPanel Width="240">
                     <TextBlock Text="name:" FontSize="10" Foreground="{DynamicResource Windows.TextFondo2}"/>
-                    <TextBlock Text="{Binding Name}" Margin="5,5,0,0"/>
+                    <TextBlock Text="{Binding NameEvent}" Margin="5,5,0,0"/>
                 </StackPanel>
                 <StackPanel>
                     <TextBlock Text="status:" FontSize="10"  Foreground="{DynamicResource Windows.TextFondo2}"/>
-                    <TextBlock Text="{Binding Status}" Margin="5,5,0,0"/>
+                    <TextBlock Text="{Binding Active}" Margin="5,5,0,0"/>
                 </StackPanel>
-                <!--
-                <StackPanel >
-                    <TextBlock Text="guild:" FontSize="10" Foreground="{DynamicResource Windows.TextFondo2}"/>
-                    <TextBlock Text="{Binding Guild}" Margin="5,5,0,0"/>
-                </StackPanel>
-                -->
                 <StackPanel >
                     <TextBlock Text="channel:" FontSize="10" Foreground="{DynamicResource Windows.TextFondo2}"/>
                     <TextBlock Text="{Binding Channel}" Margin="5,5,0,0"/>
@@ -60,11 +56,15 @@
                 </StackPanel>
                 <StackPanel >
                     <TextBlock Text="hours active:" FontSize="10" Foreground="{DynamicResource Windows.TextFondo2}"/>
-                    <TextBlock Text="{Binding HoursActive}" Margin="5,5,0,0"/>
+                    <TextBlock Text="{Binding ZoneHour}" Margin="5,5,0,0"/>
                 </StackPanel>
                 <StackPanel>
                     <TextBlock Text="creation date:" FontSize="10" Foreground="{DynamicResource Windows.TextFondo2}"/>
                     <TextBlock Text="{Binding DateCreate}" Margin="5,5,0,0"/>
+                </StackPanel>
+                <StackPanel>
+                    <TextBlock Text="Time Faltante:" FontSize="10" Foreground="{DynamicResource Windows.TextFondo2}"/>
+                    <TextBlock Text="{Binding TimeFromActive , StringFormat='{} {0:hh\\:mm\\:ss}'}" Margin="5,5,0,0"/>
                 </StackPanel>
             </WrapPanel>
         </StackPanel>

@@ -11,32 +11,33 @@ using Discord;
 
 namespace bot.acciones
 {
-    public class MensageRepetitive : Mensage
+    public class MensageRepetitive : MensageBase
     {
-        public DateTime tiempo_envio { get; private set; }
-        public TimeSpan time_to_repeat { get; private set; }
-        public string zone_hour { get; private set; }
+        public DateTime TimeActive { get; private set; }
+        public TimeSpan TimeToRepeat { get; private set; }
+        public string ZoneHour { get; private set; }
+        public DateTime ScheduledTime { get { return evento.ScheduledTime; } }
         private EventoRepetitive evento { get; set; }
 
         public MensageRepetitive(string name, string mensage, List<EmbedBuilder> embeds, DateTime tiempo_envio, TimeSpan time_to_repeat, string zone_hour, SocketChannel canalEnvio, SocketGuild guild_envio, SocketUser user_create) 
             : base(name, mensage, embeds, canalEnvio, guild_envio, user_create)
         {
             
-            this.tiempo_envio = tiempo_envio;
-            this.time_to_repeat = time_to_repeat;
-            this.zone_hour = zone_hour;
+            this.TimeActive = tiempo_envio;
+            this.TimeToRepeat = time_to_repeat;
+            this.ZoneHour = zone_hour;
 
-            this.evento = new EventoRepetitive(name, this.tiempo_envio, this.time_to_repeat, zone_hour, base.ejecutarMensage);
+            this.evento = new EventoRepetitive(name, this.TimeActive, this.TimeToRepeat, zone_hour, base.ejecutarMensage);
         }
         public MensageRepetitive(string name, string mensage, List<EmbedBuilder> embeds, DateTime tiempo_envio, TimeSpan time_to_repeat, string zone_hour, SocketChannel canalEnvio, SocketGuild guild_envio, SocketUser user_create, DateTime date_create)
             : base(name, mensage, embeds, canalEnvio, guild_envio, user_create, date_create)
         {
 
-            this.tiempo_envio = tiempo_envio;
-            this.time_to_repeat = time_to_repeat;
-            this.zone_hour = zone_hour;
+            this.TimeActive = tiempo_envio;
+            this.TimeToRepeat = time_to_repeat;
+            this.ZoneHour = zone_hour;
 
-            this.evento = new EventoRepetitive(name, this.tiempo_envio, this.time_to_repeat, zone_hour, base.ejecutarMensage);
+            this.evento = new EventoRepetitive(name, this.TimeActive, this.TimeToRepeat, zone_hour, base.ejecutarMensage);
         }
 
         private bool active = false;

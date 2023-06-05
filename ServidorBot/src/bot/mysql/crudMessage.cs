@@ -55,7 +55,7 @@ namespace bot.mysql
             }
         }
 
-        public Dictionary<int, Mensage> getTable()
+        public Dictionary<int, MensageBase> getTable()
         {
             try
             {
@@ -63,7 +63,7 @@ namespace bot.mysql
 
                 MySqlDataReader dr = cmd.ExecuteReader();
 
-                Dictionary<int, Mensage> csm = new Dictionary<int, Mensage>();
+                Dictionary<int, MensageBase> csm = new Dictionary<int, MensageBase>();
 
                 if (dr.HasRows)
                 {
@@ -93,7 +93,7 @@ namespace bot.mysql
                         user_create = App.Bot.buscarUser(dr.GetUInt64(9));
                         date_create = dr.GetDateTime(10);
 
-                        csm.Add(id, new Mensage(name, mensage, embeds, canal_envio, guild_envio, user_create, date_create));
+                        csm.Add(id, new MensageBase(name, mensage, embeds, canal_envio, guild_envio, user_create, date_create));
                     }
 
                 }
@@ -113,19 +113,19 @@ namespace bot.mysql
 
         }
 
-        public bool insertRow(Mensage mensage)
+        public bool insertRow(MensageBase mensage)
         {
             try
             {
                 MySqlCommand cmd = new MySqlCommand(INSERT_ROW, connect.Connection());
 
-                cmd.Parameters.Add("@name", MySqlDbType.VarChar).Value = mensage.name;
-                cmd.Parameters.Add("@mensage", MySqlDbType.Text).Value = mensage.mensage;
-                cmd.Parameters.Add("@embeds", MySqlDbType.JSON).Value = embedJsonS(mensage.embeds);
-                cmd.Parameters.Add("@canal_envio", MySqlDbType.Int64).Value = mensage.canal_envio.Id;
-                cmd.Parameters.Add("@guild_envio", MySqlDbType.Int64).Value = mensage.guild_envio.Id;
-                cmd.Parameters.Add("@user_create", MySqlDbType.Int64).Value = mensage.user_create.Id;
-                cmd.Parameters.Add("@date_create", MySqlDbType.DateTime).Value = mensage.date_create.ToString("yyyy:MM:dd HH:mm:ss");
+                cmd.Parameters.Add("@name", MySqlDbType.VarChar).Value = mensage.Name;
+                cmd.Parameters.Add("@mensage", MySqlDbType.Text).Value = mensage.Mensage;
+                cmd.Parameters.Add("@embeds", MySqlDbType.JSON).Value = embedJsonS(mensage.Embeds);
+                cmd.Parameters.Add("@canal_envio", MySqlDbType.Int64).Value = mensage.Channel.Id;
+                cmd.Parameters.Add("@guild_envio", MySqlDbType.Int64).Value = mensage.Guild.Id;
+                cmd.Parameters.Add("@user_create", MySqlDbType.Int64).Value = mensage.CreateFor.Id;
+                cmd.Parameters.Add("@date_create", MySqlDbType.DateTime).Value = mensage.DateCreate.ToString("yyyy:MM:dd HH:mm:ss");
 
                 cmd.ExecuteNonQuery();
 
@@ -190,7 +190,7 @@ namespace bot.mysql
             }
         }
 
-        public bool updateRow(int id, Mensage mensage)
+        public bool updateRow(int id, MensageBase mensage)
         {
             try
             {
@@ -198,11 +198,11 @@ namespace bot.mysql
                 MySqlCommand cmd = new MySqlCommand(UPDATE_ROW, connect.Connection());
 
                 cmd.Parameters.Add("@id", MySqlDbType.Int64).Value = id;
-                cmd.Parameters.Add("@name", MySqlDbType.VarChar).Value = mensage.name;
-                cmd.Parameters.Add("@mensage", MySqlDbType.Text).Value = mensage.mensage;
-                cmd.Parameters.Add("@embeds", MySqlDbType.JSON).Value = embedJsonS(mensage.embeds);
-                cmd.Parameters.Add("@canal_envio", MySqlDbType.Int64).Value = mensage.canal_envio.Id;
-                cmd.Parameters.Add("@date_create", MySqlDbType.DateTime).Value = mensage.date_create;
+                cmd.Parameters.Add("@name", MySqlDbType.VarChar).Value = mensage.Name;
+                cmd.Parameters.Add("@mensage", MySqlDbType.Text).Value = mensage.Mensage;
+                cmd.Parameters.Add("@embeds", MySqlDbType.JSON).Value = embedJsonS(mensage.Embeds);
+                cmd.Parameters.Add("@canal_envio", MySqlDbType.Int64).Value = mensage.Channel.Id;
+                cmd.Parameters.Add("@date_create", MySqlDbType.DateTime).Value = mensage.DateCreate;
 
 
                 int a = cmd.ExecuteNonQuery();

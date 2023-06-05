@@ -61,7 +61,7 @@ namespace ServidorBot.src.View.ViewModel
         #region Metodos publicos
         public void RefresUsers()
         {
-            Users = new ObservableCollection<IDMChannel>(App.Bot._chanelDMUser.ToList());
+            Users = new ObservableCollection<IDMChannel>(App.Bot.GetUsersDMChannels());
             App.Bot._cliente.MessageReceived += _cliente_MessageReceived;
         }
 

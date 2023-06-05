@@ -41,7 +41,7 @@ namespace bot.actividad
             // -1 si ocurrio un error al agregar a la base de datos
             // -2 Si ubo un error al verificar en la base de datos el name
 
-            int vrf_row = dbEvents.verificInTable(mensageR.name);
+            int vrf_row = dbEvents.verificInTable(mensageR.Name);
 
             if (vrf_row == 1)
             {
@@ -53,7 +53,7 @@ namespace bot.actividad
                 bool vr = dbEvents.insertRow(mensageR);
                 if (vr)
                 {
-                    int id = dbEvents.obtenerIdForName(mensageR.name);
+                    int id = dbEvents.obtenerIdForName(mensageR.Name);
                     collecionMensageRepetitive.Add(id, mensageR);
                     return 1;
 
@@ -135,12 +135,12 @@ namespace bot.actividad
             }
         }
 
-        public List<MensageRepetitive> getEventGuild(SocketGuild guild)
+        public List<MensageRepetitive> getMensageEventGuild(SocketGuild guild)
         {
-            List<MensageRepetitive> temp = new List<MensageRepetitive>();
+            List<MensageRepetitive> temp = new();
             foreach (var element in collecionMensageRepetitive)
             {
-                if (guild == element.Value.guild_envio)
+                if (guild == element.Value.Guild)
                 {
                     temp.Add(element.Value);
                 }

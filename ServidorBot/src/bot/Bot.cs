@@ -20,8 +20,8 @@ namespace bot
     public class Bot
     {
         public DiscordSocketClient? _cliente { get; private set; }
-        public CargaDeEvento? _eventoMenRep { get; private set; }
-        public CargaDeUserDM? _chanelDMUser { get; private set; }
+        private CargaDeEvento? _eventoMenRep { get; set; }
+        private CargaDeUserDM? _chanelDMUser { get; set; }
 
 
 
@@ -117,13 +117,7 @@ namespace bot
         private void CargarEventos()
         {
             _eventoMenRep = new CargaDeEvento();
-
-            //var dt = new DateTime(2023, 01, 02, 12, 05, 00);
-            //var ch = _cliente.GetChannel(1013262734411972718);
-            //var gh = _cliente.GetGuild(996937109740978226);
-            //var uh = _cliente.GetUser(472582540134449152);
-            //_eventoMenRep.agregarMRepetitivo(new MensageRepetitive("Despedida", "Chao, Geovanny", new List<EmbedBuilder>(), dt, TimeSpan.FromSeconds(15), "utc", ch, gh, uh));
-
+            
             _eventoMenRep.activarEventos();
         }
 
@@ -167,18 +161,30 @@ namespace bot
         //         Metodos
 
         /// <summary>
-        /// Busca el canal de discord con el ide que le declares
+        /// Busca el canal de discord con el id que le declares
         /// </summary>
         /// <param name="id">id del canal a buscar</param>
-        /// <returns></returns>
+        /// <returns>Retorna el Canal.</returns>
         public SocketChannel buscarCanal(ulong id)
         {
             return _cliente.GetChannel(id);
         }
+
+        /// <summary>
+        /// Busca un gremio por su id
+        /// </summary>
+        /// <param name="id">ID del gremio a buscar</param>
+        /// <returns>Retorna el Gremio.</returns>
         public SocketGuild buscarGuild(ulong id)
         {
             return _cliente.GetGuild(id);
         }
+
+        /// <summary>
+        /// Busca a un usuario por su id.
+        /// </summary>
+        /// <param name="id">ID del usuario a buscar</param>
+        /// <returns>Retorna el usuario.</returns>
         public SocketUser buscarUser(ulong id)
         {
             return _cliente.GetUser(id);
@@ -195,6 +201,29 @@ namespace bot
             return temp.Result;
         }
 
+        /// <summary>
+        /// Obtiene la lista de todos los mensajes que esta registrado al guild
+        /// </summary>
+        /// <param name="guild">El gremio que quieres obtener la lista.</param>
+        /// <returns></returns>
+        public List<MensageBase> GetMensajeGuild(SocketGuild guild)
+        {
+            return null;
+        }
+
+        /// <summary>
+        /// Obtiene la lista de todos los EventosMensajes que esta registrado al guild
+        /// </summary>
+        /// <param name="guild">El gremio que quieres obtener la lista.</param>
+        /// <returns></returns>
+        public List<MensageRepetitive> GetMensajeRepeatGuild(SocketGuild guild)
+        {
+            return _eventoMenRep.getMensageEventGuild(guild);
+        }
+        public List<IDMChannel> GetUsersDMChannels()
+        {
+            return _chanelDMUser.ToList();
+        }
         //---------------------------------------------------------------------------------------
     }
 

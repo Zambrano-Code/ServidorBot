@@ -117,16 +117,16 @@ namespace bot.mysql
             {
                 MySqlCommand cmd = new MySqlCommand(INSERT_ROW, connect.Connection());
 
-                cmd.Parameters.Add("@name", MySqlDbType.VarChar).Value = mensageR.name;
-                cmd.Parameters.Add("@mensage", MySqlDbType.Text).Value = mensageR.mensage;
-                cmd.Parameters.Add("@embeds", MySqlDbType.JSON).Value = embedJsonS(mensageR.embeds);
-                cmd.Parameters.Add("@tiempo_envio", MySqlDbType.DateTime).Value = mensageR.tiempo_envio.ToString("yyyy:MM:dd HH:mm:ss");
-                cmd.Parameters.Add("@tiempo_reenvio", MySqlDbType.VarChar).Value = mensageR.time_to_repeat.ToString();
-                cmd.Parameters.Add("@zone_hour", MySqlDbType.VarChar).Value = mensageR.zone_hour;
-                cmd.Parameters.Add("@canal_envio", MySqlDbType.Int64).Value = mensageR.canal_envio.Id;
-                cmd.Parameters.Add("@guild_envio", MySqlDbType.Int64).Value = mensageR.guild_envio.Id;
-                cmd.Parameters.Add("@user_create", MySqlDbType.Int64).Value = mensageR.user_create.Id;
-                cmd.Parameters.Add("@date_create", MySqlDbType.DateTime).Value = mensageR.date_create.ToString("yyyy:MM:dd HH:mm:ss");
+                cmd.Parameters.Add("@name", MySqlDbType.VarChar).Value = mensageR.Name;
+                cmd.Parameters.Add("@mensage", MySqlDbType.Text).Value = mensageR.Mensage;
+                cmd.Parameters.Add("@embeds", MySqlDbType.JSON).Value = embedJsonS(mensageR.Embeds);
+                cmd.Parameters.Add("@tiempo_envio", MySqlDbType.DateTime).Value = mensageR.TimeActive.ToString("yyyy:MM:dd HH:mm:ss");
+                cmd.Parameters.Add("@tiempo_reenvio", MySqlDbType.VarChar).Value = mensageR.TimeToRepeat.ToString();
+                cmd.Parameters.Add("@zone_hour", MySqlDbType.VarChar).Value = mensageR.ZoneHour;
+                cmd.Parameters.Add("@canal_envio", MySqlDbType.Int64).Value = mensageR.Channel.Id;
+                cmd.Parameters.Add("@guild_envio", MySqlDbType.Int64).Value = mensageR.Guild.Id;
+                cmd.Parameters.Add("@user_create", MySqlDbType.Int64).Value = mensageR.CreateFor.Id;
+                cmd.Parameters.Add("@date_create", MySqlDbType.DateTime).Value = mensageR.DateCreate.ToString("yyyy:MM:dd HH:mm:ss");
 
                 cmd.ExecuteNonQuery();
 
@@ -198,16 +198,16 @@ namespace bot.mysql
 
                 MySqlCommand cmd = new MySqlCommand(UPDATE_ROW, connect.Connection());
 
-                cmd.Parameters.Add("@name", MySqlDbType.VarChar).Value = mensageR.name;
-                cmd.Parameters.Add("@mensage", MySqlDbType.Text).Value = mensageR.mensage;
-                cmd.Parameters.Add("@embeds", MySqlDbType.JSON).Value = embedJsonS(mensageR.embeds);
-                cmd.Parameters.Add("@tiempo_envio", MySqlDbType.DateTime).Value = mensageR.tiempo_envio.ToString("yyyy:MM:dd HH:mm:ss");
-                cmd.Parameters.Add("@tiempo_reenvio", MySqlDbType.VarChar).Value = mensageR.time_to_repeat.ToString();
-                cmd.Parameters.Add("@zone_hour", MySqlDbType.VarChar).Value = mensageR.zone_hour;
-                cmd.Parameters.Add("@canal_envio", MySqlDbType.Int64).Value = mensageR.canal_envio.Id;
-                cmd.Parameters.Add("@guild_envio", MySqlDbType.Int64).Value = mensageR.guild_envio.Id;
-                cmd.Parameters.Add("@user_create", MySqlDbType.Int64).Value = mensageR.user_create.Id;
-                cmd.Parameters.Add("@date_create", MySqlDbType.DateTime).Value = mensageR.date_create.ToString("yyyy:MM:dd HH:mm:ss");
+                cmd.Parameters.Add("@name", MySqlDbType.VarChar).Value = mensageR.Name;
+                cmd.Parameters.Add("@mensage", MySqlDbType.Text).Value = mensageR.Mensage;
+                cmd.Parameters.Add("@embeds", MySqlDbType.JSON).Value = embedJsonS(mensageR.Embeds);
+                cmd.Parameters.Add("@tiempo_envio", MySqlDbType.DateTime).Value = mensageR.TimeActive.ToString("yyyy:MM:dd HH:mm:ss");
+                cmd.Parameters.Add("@tiempo_reenvio", MySqlDbType.VarChar).Value = mensageR.TimeToRepeat.ToString();
+                cmd.Parameters.Add("@zone_hour", MySqlDbType.VarChar).Value = mensageR.ZoneHour;
+                cmd.Parameters.Add("@canal_envio", MySqlDbType.Int64).Value = mensageR.Channel.Id;
+                cmd.Parameters.Add("@guild_envio", MySqlDbType.Int64).Value = mensageR.Guild.Id;
+                cmd.Parameters.Add("@user_create", MySqlDbType.Int64).Value = mensageR.CreateFor.Id;
+                cmd.Parameters.Add("@date_create", MySqlDbType.DateTime).Value = mensageR.DateCreate.ToString("yyyy:MM:dd HH:mm:ss");
 
 
                 int a = cmd.ExecuteNonQuery();
